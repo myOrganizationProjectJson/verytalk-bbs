@@ -1,0 +1,33 @@
+
+<table class="tb tb2 ">
+	
+		<tr>
+			<th colspan="15" style="text-align:right;"><a href="{CJ_PLUGIN_URL}pmod=reports&op=monitor-ipchange&op1=export&formhash={FORMHASH}"><img src="source/plugin/chaoji_com/resource/images/export.png" style="vertical-align: middle;" /> {lang chaoji_com:export_data}</a></th>
+		</tr>
+		<tr class="partition">
+			<th>{lang chaoji_com:report8_1}</th>
+			<th>{lang chaoji_com:report8_2}</th>
+			<th>{lang chaoji_com:report8_3}</th>
+		</tr>
+	<tbody id="list-1">
+		<tr><td colspan="15" style="text-align:center;"><img src="static/image/admincp/ajax_loader.gif" /></td></tr>
+					
+	</tbody>
+</table>
+<script type="text/javascript">
+jq(function(){
+	jq.getJSON('{CJ_MONITOR_IPCHANGE_URL}&formhash={FORMHASH}', function(data){
+		var data = data.data;
+		var str = '';
+		for(var i=0; i< data.length; i++){
+			str += '<tr class="hover">\
+			<td>' + chaoji_formatdate(data[i][0]) + '</td>\
+			<td>' + data[i][1] + '</td>\
+			<td>' + data[i][2] + '</td>\
+		</tr>';
+		}
+		jq('#list-1').html(str);
+	});
+});
+</script>
+						

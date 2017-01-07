@@ -1,0 +1,2 @@
+<?php die('Permission denied');?>
+a:1:{s:10:"member_get";a:3:{s:4:"data";a:4:{s:9:"get_count";s:4:"1000";s:7:"now_get";i:250;s:12:"all_get_time";d:196.203736000000020567313185892999172210693359375;s:13:"success_count";i:199;}s:7:"timeout";i:1418803907;s:3:"ttl";i:3600;}}

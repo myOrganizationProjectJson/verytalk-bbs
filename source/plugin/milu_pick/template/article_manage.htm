@@ -1,0 +1,261 @@
+<!--{template milu_pick:pick_header}-->
+<script src="static/js/calendar.js?v={PICK_VERSION}" type="text/javascript" type="text/javascript"></script>
+<script>
+
+function show_article_cover(cover_pic){
+	hideWindow('article_cover');
+	show_html_window('article_cover', '{lang milu_pick:article_cover}', 400, 360, '<img src="'+cover_pic+'" />', 1);
+}
+
+function show_article_detail(aid,do_id){
+	showWindow('article_detail', PICK_URL+'picker_manage&myac=show_article_detail&aid='+aid, 'get', 1, {'maxh':'800'});
+	
+}
+function search_submit(e,f){
+	if (e.keyCode == 13) { 
+		f.submit();
+	} 
+}
+function public_add(aid, pid){
+	var html = $("public_add_show").innerHTML;
+	var to_type = $("public_add_type").value;
+	if(to_type > 0) {
+		public_add_run(aid, pid);
+		return;
+	}
+	show_html_window('share_pick', '{lang milu_pick:front_public}', 410, 200, '<div class="c bart" style=" width:98%; height:145px;">'+html+'</div><p class="o pns"><button onclick="public_add_run('+aid+', '+pid+');" class="pn pnc" name="dsf" type="submit"><span>{lang milu_pick:ok}</span></button><button onclick="hideWindow(\'share_pick\');" class="pn" name="dsf" type="reset"><em>{lang milu_pick:cancel}</em></button></p>');
+}
+function public_add_run(aid, pid){
+	var to_type = $("public_add_type").value;
+	var url = '';
+	if(to_type == 1){
+		url = 'portal.php?mod=portalcp&ac=article&catid='+$("public_portal").value;
+	}else if(to_type == 2){
+		url = 'forum.php?mod=post&action=newthread&fid='+$("public_forums").value+'&sortid='+$("forum_threadtype_id").value;	
+	}else if(to_type == 3){
+		url = 'home.php?mod=spacecp&ac=blog';	
+	}else{
+		showDialog("{lang milu_pick:please_public_select}", 'notice');
+		return;
+	}
+	var href = SITEURL+url+'&pick_aid='+aid+'&pid='+pid;
+	window.open(href,'_blank');
+	hideWindow('share_pick');
+}
+</script>
+<div class="itemtitle">
+	{if $info['p']}
+	<ul class="tab1" style="margin-top:8px;">
+	<!--{loop $info['status_arr'] $key $rs}-->
+		<li {if $info['status'] == $key }class="current" {/if}><a href="?{PICK_GO}picker_manage&myac=article_manage&pid={$info['pid']}&status={$key}&p=$info['p']"><span>{$rs}{if $info['a_c'][$key]}({$info['a_c'][$key]}){/if}</span></a></li>
+		<!--{/loop}-->
+	</ul>
+	{/if}
+<form onkeydown="javascript: search_submit(event,this);" id="form12" name="form12"  action="?{PICK_GO}picker_manage&myac=article_manage{if $info['p']}&pid={$info['pid']}&status={$info['status']}{/if}&p={$info['p']}" method="post"> 
+ <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+
+  <p style="float:left; margin-top:3px; margin-left:10px; width:{if $info['p']}800{else}900{/if}px;">
+    <span style="float:left"><font style="float:left; margin-top:5px;">{lang milu_pick:article_title}:</font>
+      <input type="text" style="float:left; margin:3px 10px 0 10px; width:175px; height:16px;" name="set[s]"  value="{$info['s']}" id="srchforumipt" class="txt">	
+	  {if !$info[p]}
+	  {eval echo $info['pick_select'];}
+	  {eval echo pickOutput::select_output($info['status_arr'], '', 'set[status]', $info['status'], 1);}
+	  {/if}	
+	   {if $info['status'] != 5}       
+      {eval echo pickOutput::select_output($info['orderby_arr'], '', 'set[orderby]', $info['orderby'], 1);}  
+      {eval echo pickOutput::select_output($info['ordersc_arr'], '', 'set[ordersc]', $info['ordersc'], 1);} 
+      {/if} 
+      {eval echo pickOutput::select_output($info['perpage_arr'], '', 'set[perpage]', $info['perpage'], 1);}      </span>
+    
+    <input  style="float:left;  margin:0 0 0 10px; padding:1px 5px; height:23px;" name="submit" type="submit" class="btn" value="{lang milu_pick:search}" id="submit_editsubmit">
+  </p>
+</form></div>
+	
+	
+<form id="cpform" action="?{PICK_GO}picker_manage&myac=article_batch&tpl=no&pid={$info['pid']}&orderby={$info['orderby']}&ordersc={$info['ordersc']}&perpage={$info['perpage']}&s={$info['s']}&status={$info['status']}&p={$info['p']}&pid={$info['pid']}" autocomplete="off" method="post" name="cpform">
+ <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+<input type="hidden" value="" name="scrolltop" id="formscrolltop">
+<input type="hidden" value="{$info['p_arr']['forum_threadtype_id']}" name="forum_threadtype_id" id="forum_threadtype_id">
+
+   </p>
+    <table class="tb tb2 ">
+	<tr><th colspan="28" class="partition">{if {$info['pick']['name']}}{$info['pick']['name']}{else}{lang milu_pick:all}{/if} - {lang milu_pick:article_list}</th>
+	</tr>
+<tbody><tr class="header"><th></th>
+{if $info['status'] == 5}
+<th>{lang milu_pick:reply_content}</th>
+<th>{lang milu_pick:public_username}</th>
+{/if}
+<th>{lang milu_pick:article_title}</th>
+{if !$info['p']}
+<th>{lang milu_pick:picker}</th>
+<th>{lang milu_pick:now_status}</th>
+{/if}
+{if $info['status'] == 4 || $info['status'] == 5}
+  <th>{lang milu_pick:timing_dateline}</th>
+  {if $info['status'] != 5}
+  <th>{lang milu_pick:timing_public_to}</th>
+  {/if}
+
+{else}
+<th>{lang milu_pick:protal}</th>
+<th>{lang milu_pick:bbs}</th>
+<th>{lang milu_pick:blog}</th>
+<!--<th>{lang milu_pick:public_time}</th>-->
+{/if}
+  {if $info['status'] != 4 && $info['status'] != 5}
+  <th>{lang milu_pick:add_dateline}</th>
+  <th>{lang milu_pick:img}</th>
+  <th>{lang milu_pick:file}</th>
+  <th>{lang milu_pick:attach_filesize}</th>
+  <th>{lang milu_pick:article_cover}</th>
+  <th>{lang milu_pick:replies}</th>
+  <th>{lang milu_pick:page_num}</th>
+ {/if} 
+  {if $info['status'] != 5}
+  <th>{lang milu_pick:op}</th>
+  {/if}
+</tr></tbody>
+  <tbody id="">
+  <!--{if $info['rs']}-->
+  <!--{loop $info['rs'] $key $rs}-->
+<tr class="hover"><td class="td30"><input type="checkbox"  name="aid[]" value="{if $info['status'] == 4 || $info['status'] == 5}{$rs['id']}{else}{$rs[aid]}{/if}" class="checkbox"></td>
+{if $info['status'] == 5}
+  <td ><a id="g_up{$rs['id']}" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});" >{$rs['short_content']}</a><div id="g_up{$rs[id]}_menu" class="tip tip_4" style="display: none;"><div class="tip_horn"></div><div class="tip_c">{$rs['content']}</div></td>
+  <td><a target="_blank" href="home.php?mod=space&uid={$rs['authorid']}&do=profile">{$rs['author']}</a></td>
+ {/if} 
+  <td >
+{if $rs['special'] == 3}<span class="xi1" style="margin: 0 3px 0 0; float:left"><img style="float:left"  src="static/image/common/rewardsmall.gif" alt="{lang milu_pick:reward}" title="{lang milu_pick:reward}"><span class="xw1" style="font-weight:bold; width:27px; float:left">{eval echo abs($rs['reward_price']);}</span> </span>
+{if $rs['reward_price'] < 0}
+<span class="xi1">[{lang milu_pick:resolved}]</span>
+{else}
+<span class="green">[{lang milu_pick:no_resolve}]</span>
+{/if}
+{/if}<a {if $info['status'] != 5}href="{$rs['url']}" target="_blank" {/if} title="{$rs['full_title']}">{$rs['title']}</a></td>
+  {if !$info['p']}
+  <td>{$rs['name']}</td>
+  <td>{$info['status_arr'][$rs['status']]}</td>
+  {/if}
+
+  {if $info['status'] == 4 || $info['status'] == 5}
+  <td>{$rs['public_dateline']}</td>
+  {if $info['status'] != 5}
+  <td>{if $rs['public_type'] == 1}{lang milu_pick:protal}{elseif $rs['public_type'] == 2}{lang milu_pick:bbs}{elseif  $rs['public_type'] == 3}{lang milu_pick:blog}{/if}</td>
+  {/if}
+   
+{else}
+    <td>{if $rs['portal_id']}<a target="_blank" href="portal.php?mod=view&aid={$rs['portal_id']}" >{lang milu_pick:visit}</a>{/if}</td>
+    <td>{if $rs['forum_id']}<a target="_blank" href="forum.php?mod=viewthread&tid={$rs['forum_id']}" >{lang milu_pick:visit}</a>{/if}</td>
+    <td>{if $rs['blog_id']}<a target="_blank" href="home.php?mod=space&do=blog&uid={$rs['uid']}&id={$rs['blog_id']}" >{lang milu_pick:visit}</a>{/if}</td>
+	<!--<td>{$rs['public_time']}</td>-->
+	
+{/if}	
+  {if $info['status'] != 4 && $info['status'] != 5}
+  <td>{$rs['dateline']}</td>
+  <td>{$rs['pic']}</td>
+  <td>{$rs['file_count']}</td>
+  <td>{$rs['attach_filesize_count']}</td>
+  <td>{if $rs['cover_pic']}<a href="javascript:void(0);" class="view_cover" onclick="show_article_cover('{$rs['cover_pic']}');" >{lang milu_pick:view}</a>{else}{lang milu_pick:no_have}{/if}</td>
+  <td>{$rs['reply_num']}</td>
+  <td>{$rs['contents']}</td>
+  {/if}
+  <td>
+  <!--<a href="?{PICK_GO}picker_manage&myfunc=article_edit&aid={$rs['aid']}" target="_blank" >¿ìËÙ±à¼­</a>&nbsp;-->
+  {if $info['status'] != 4 && $info['status'] != 5}
+   <a href="javascript:void(0);" class="public_add" onclick="public_add({$rs['aid']}, {$rs['pid']})" id="public_add_{$rs['aid']}" >{lang milu_pick:_add}</a>&nbsp;
+   <a href="?{PICK_GO}picker_manage&myac=article_repick_one&aid={$rs['aid']}&pid={$rs['pid']}&status={$status}&url_args={$info['url_args']}&article_url={eval echo urlencode($rs['url'])}" >{lang milu_pick:go_picker}</a>&nbsp;
+  <a href="?{PICK_GO}picker_manage&myac=pick_article_edit&aid={$rs['aid']}&pid={$rs['pid']}&status={$status}&url_args={$info['url_args']}" >{lang milu_pick:edit}</a>&nbsp;
+  {/if}
+  {if $info['status'] != 5}
+  <a href="javascript:void(0)" onclick="show_article_detail({$rs[aid]},{PICK_ID})">{lang milu_pick:view}</a> 
+  {/if}
+   {if $info['status'] != 4 && $info['status'] != 5}
+	<a href="?{PICK_GO}picker_manage&myaction=article_delete&tpl=no&pid={$info['pid']}&orderby={$info['orderby']}&ordersc={$info['ordersc']}&perpage={$info['perpage']}&s={$info['s']}&status={$info['status']}&p={$info['p']}&pid={$info['pid']}&aid={$rs['aid']}" >{lang milu_pick:del}</a>
+    {/if}
+   </td>
+</tr>
+   <!--{/loop}-->
+   <!--{else}-->
+  <tr class="hover"><td colspan="17" align="center" class="td25">{lang milu_pick:no_data}</td></tr>
+  <!--{/if}-->
+  </tbody><tbody style="display: none" id="subnav_6"></tbody>
+<tbody></tbody><tbody><tr><td colspan="28"><div class="cuspages right">{$info['multipage']}</div><div class="fixsel"><input type="checkbox" name="chkall" id="chkall" class="checkbox" onclick="checkAll('prefix', this.form, 'aid')"><label for="chkall">{lang milu_pick:select_all}</label></div></td></tr><script type="text/JavaScript">_attachEvent(document.documentElement, 'keydown', function (e) { entersubmit(e, 'submit'); });</script></tbody></table>
+  
+  
+  <table class="tb tb2 nobdt">
+<tbody><tr><th colspan="15" class="partition">{lang milu_pick:op}</th></tr>
+<tr class="header"><th></th><th>{lang milu_pick:op}</th><th>{lang milu_pick:select_value}</th></tr>
+
+<tr class="hover">
+  <td class="td25">&nbsp;</td>
+  <td class="td24">{lang milu_pick:op_area}</td>
+  <td class="rowform" style="width:auto;"><span class="td25">
+    <input name="oparea" type="radio" {if $info['oparea'] != 'all'}checked="checked"{/if} class="radio" id="radio" onclick="this.form.modsubmit.disabled=false;" value="selected" checked="checked" />
+    {lang milu_pick:selected_data}
+  </span><span class="td25">
+  <input class="radio" {if $info['oparea'] == 'all'}checked="checked"{/if} type="radio" id="radio2" name="oparea" value="all" onclick="this.form.modsubmit.disabled=false;" />
+  {lang milu_pick:all_data}</span></td>
+</tr>
+
+
+
+
+
+{if ($info['status'] != 4 && $info['status'] != 5)}
+
+{if $info['pid']}
+<tr class="hover"><td class="td25"><input {if $info['optype'] == 'move_portal'}checked="checked"{/if} class="radio" type="radio" id="optype_move_portal" name="optype" value="move_portal" onclick="show_hide('show_public_set','',1);"></td>
+<td class="td24">{lang milu_pick:batch_public_p}</td>
+<td class="rowform" style="width:auto;">{$info['portalselect']}</td>
+</tr>
+<tr class="hover"><td class="td25"><input {if $info['optype'] == 'move_forums'}checked="checked"{/if} class="radio" type="radio" id="optype_import_forums" name="optype" value="move_forums" onclick="show_hide('show_public_set','',1);"></td>
+<td class="td24">{lang milu_pick:batch_public_b}</td>
+<td class="rowform" style="width:auto;">{$info['forumselect']}<span id="threadtypes">{$info['threadtypes']}</span></td></tr>
+<tr class="hover"><td class="td25"><input {if $info['optype'] == 'move_blog'}checked="checked"{/if} class="radio" type="radio" id="optype_move_blog" name="optype" value="move_blog" onclick="show_hide('show_public_set','',1);"></td>
+<td class="td24">{lang milu_pick:batch_public_blog}</td>
+<td class="rowform" style="width:auto;">{$info['blogselect']}</td>
+</tr>
+{/if}
+<tr class="hover">
+  <td class="td25"><input class="radio" {if $info['optype'] == 'move_picker'}checked="checked"{/if} type="radio" id="radio3" name="optype" value="move_picker" onclick="show_hide('show_public_set','',2);"></td>
+  <td class="td24">{lang milu_pick:move_to_picker}</td>
+  <td class="rowform" style="width:auto;">{eval echo $info['article_move_pick_select'];}</td>
+</tr>
+<!--
+<tr class="hover"><td class="td25"><input {if $info['optype'] == 'move_trash'}checked="checked"{/if} class="radio" type="radio" id="move_trash" name="optype" value="move_trash" onclick="show_hide('show_public_set','',2);"></td>
+<td class="td24">{lang milu_pick:check_content_available}</td>
+<td class="rowform" style="width:auto;">&nbsp;</td></tr>
+-->
+<tr class="hover"><td class="td25"><input {if $info['optype'] == 'optype_repick'}checked="checked"{/if} class="radio" type="radio" id="optype_repick" name="optype" value="repick"></td>
+<td class="td24">{lang milu_pick:go_picker_bat}</td>
+<td class="rowform" style="width:auto;">&nbsp;</td></tr>
+
+
+{/if}
+{if $info['status'] == 4 || $info['status'] == 5}
+<tr class="hover"><td class="td25"><input {if $info['optype'] == 'timing_delete'}checked="checked"{/if} class="radio" type="radio" id="optype_timing_delete" name="optype" value="timing_delete" onclick="show_hide('show_public_set','',2);"></td><td class="td24">{lang milu_pick:batch_cancel}</td>
+<td class="rowform" style="width:auto;">{lang milu_pick:batch_cancel_timing}</td>
+</tr>
+{else}
+<tr class="hover"><td class="td25"><input {if $info['optype'] == 'delete'}checked="checked"{/if} class="radio" type="radio" id="optype_delete" name="optype" value="delete" onclick="show_hide('show_public_set','',2);"></td><td class="td24">{lang milu_pick:batch_del}</td><td class="rowform" style="width:auto;">&nbsp;</td></tr>
+{/if}
+
+
+<tr><td colspan="15"><div class="fixsel">{if $info['pick']['is_public_del'] == 1}<input type="hidden" name="is_public_del" value="1" /> {/if} <input type="submit" class="btn" id="submit_modsubmit" name="modsubmit" title="" value="{lang milu_pick:submit}"></div></td></tr></tbody></table>
+  <div id="public_add_show" style="display:none">
+  		 <label>{lang milu_pick:public_to}:</label>
+    <select name="set[public_type]" id="public_add_type" onchange="change_public_type(this.value);">
+	  <option {if !$info['pick']['public_type']}selected="selected"{/if} value="0">{lang milu_pick:please_select}</option>
+      <option {if $info['pick']['public_type'] == 1}selected="selected"{/if} value="1">{lang milu_pick:protal}</option>
+      <option {if $info['pick']['public_type'] == 2}selected="selected"{/if}  value="2">{lang milu_pick:bbs}</option>
+      <option {if $info['pick']['public_type'] == 3}selected="selected"{/if}  value="3">{lang milu_pick:blog}</option>
+      </select>
+    </label>
+    <span id="portal_show" {if $info['pick']['public_type'] != 1}style="display:none"{/if}>{$info['public_portalselect']}&nbsp;&nbsp;</span>
+    <span id="forums_show"  {if $info['pick']['public_type'] != 2}style="display:none"{/if}> <!--{$info['forumselect_public']}-->&nbsp;&nbsp;</span>
+    <span id="blog_show" {if $info['pick']['public_type'] != 3}style="display:none"{/if} > {$info['public_blogselect']}&nbsp;&nbsp;</span>&nbsp;&nbsp;
+    <br />{lang milu_pick:public_add_class_notice}
+
+  </div>
+</form>
+

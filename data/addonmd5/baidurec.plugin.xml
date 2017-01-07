@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[baidurec.plugin]]></item>
+	<item id="RevisionID"><![CDATA[39629]]></item>
+	<item id="SN"><![CDATA[2014121713HhsiM0hP3p]]></item>
+	<item id="RevisionDateline"><![CDATA[1415959201]]></item>
+	<item id="Data">
+		<item id="/ajax.inc.php"><![CDATA[9378f4a25d7df5da527babcb86527510]]></item>
+		<item id="/baidurec.class.php"><![CDATA[3a8a5e7084bdaeb6716687a914862649]]></item>
+		<item id="/discuz_plugin_baidurec_SC_GBK.xml"><![CDATA[a155097f43e3438cd57b27a280342a30]]></item>
+		<item id="/discuz_plugin_baidurec_SC_UTF8.xml"><![CDATA[0204b1f556099b9b06d264707af6594f]]></item>
+		<item id="/help.inc.php"><![CDATA[f41f81df3b1912fba937eba8e4d5486c]]></item>
+		<item id="/main.inc.php"><![CDATA[10076e6068845ce4daca3ae121c5b99a]]></item>
+	</item>
+</root>

@@ -1,0 +1,27 @@
+<!--{template common/header}-->
+<div class="s_dbdh">
+	<div class="s_logo">
+		<a href="forum.php"><img src="./template/strong_g/touch/images/s_logo.png"/></a>
+	</div>
+	<div class="right">
+		<a href="search.php?mod=forum&mobile=2"><img src="./template/strong_g/touch/images/s_search.png"/></a>
+
+	</div>
+</div>
+
+
+
+<!--{ad/home1_mobile}-->
+<!-- main threadlist start -->
+<div class="threadlist">
+	<!--{loop $data $key $list}-->
+		<!--{subtemplate forum/guide_list_row}-->
+	<!--{/loop}-->
+</div>
+
+<!-- main threadlist end -->
+$multipage
+
+<!--{ad/home2_mobile}-->
+
+<!--{template common/footer}-->

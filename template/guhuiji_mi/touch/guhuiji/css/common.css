@@ -1,0 +1,38 @@
+@charset "utf-8";
+*, html, body, ul, li, header, nav, section { padding: 0px; margin: 0px; list-style-type: none; }
+html { overflow-y: hidden; }
+body ,#bug{ background: #F8F8F8; }
+a { text-decoration: none; color: #333; }
+section { float: none; clear: both; background: #FFF; margin: 20px 0px; }
+.pa { position: absolute; z-index: 100; }
+#bug {position: absolute; top: 0px; right: 0px; bottom: 0px; z-index: 1; }
+#main { z-index: 80; position: relative; }
+#bug, #main { -moz-transition: left .5s ease-in; -webkit-transition: left .5s ease-in; -o-transition: left .5s ease-in; -ms-transition: left .5s ease-in; transition: left .5s ease-in; left: 0px; }
+.header { height: 45px; background: #222; position: relative; }
+.header i { background-size: 44px 132px; background-image: url(../img/header_icon.png); display: inline-block; width: 44px; height: 44px; }
+.header .header_btn { left: 0px; top: 0px; width: 44px; height: 44px; padding: 0px 0px 0px 5px; }
+.header .header_bbs { top: 0px; width: 44px; height: 44px; padding: 0px 0px 0px 5px; right: 0px; }
+.header .header_btn .header_btn_icon { background-position: 0 0; }
+.header .header_bbs .header_bbs_icon { background-position: 0 -44px; }
+.header .header_tit { height: 44px; line-height: 44px; font-size: 20px; text-align: center; color: #FFF; text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-mask: -webkit-gradient(linear, left 25%, left 75%, from(#000), to(rgba(0, 0, 0, 0.6))); font-weight: bold; }
+.nav_left { position: absolute; z-index: 0; left: 0px; top: 0px; bottom: 0px; width: 239px; background: #222222; border-right: 1px solid #535353; overflow: hidden; }
+.nav_left .home { float: left; width: 50px; height: 50px; margin: 10px; border: 2px solid #3a3c3f; border-radius: 5px; overflow: hidden; }
+.nav_left .home img { display: block; width: 100%; height: 100%; border-radius: 4px; }
+.nav_left .home_login { height: 64px; float: left; clear: right; text-align: center; }
+.nav_left .home_login a { color: #A3A3A3; line-height: 64px; padding: 0px 10px; font-size: 15px; }
+.nav_left ul { clear: both; float: none; }
+.nav_left ul li { height: 37px; border-top: 1px solid #3c3c3c; border-bottom: 1px solid #000000; line-height: 37px; }
+.nav_left ul li a { position: relative; display: block; height: 37px; overflow: hidden; padding-left: 17px; color: #fff; -webkit-text-shadow: 1px 1px 2px #FFFFFF; -moz-text-shadow: 1px 1px 2px #FFFFFF; -o-text-shadow: 1px 1px 2px #FFFFFF; text-shadow: 1px 1px 2px #FFFFFF; }
+.nav_index { background: #FFFFFF; height: 80px; border-bottom: solid 2px #DBDBDB; }
+.nav_index ul li { float: left; height: 40px; width: 20%; }
+.nav_index ul li a { display: block; text-align: center; line-height: 40px; color: #333; font-size: 16px; }
+.youlian { overflow: hidden; padding: 5px; background: #FFF; }
+.youlian h3 { height: 30px; line-height: 30px; ; font-size: 16px; border-bottom: 1px solid #EEE; padding-left:10px;}
+.youlian ul li { width: 20%; float: left; height: 28px; display: inline;}
+.youlian ul li a { font-size: 13px; line-height:28px; display:block; text-align:center; }
+.footer { padding: 20px; background: #FF9900; text-align: center; clear: both; float: none; }
+.footer .banben { height: 50px; }
+.footer .banben a { color: #fff; display: inline-block; font-size: 15px; margin-left: 12px; line-height: 50px; }
+.footer .banben a.a { background-color: rgba(0,0,0,.2); border-radius: 2px; color: white; height: 30px; line-height: 30px; width: 67px; }
+.footer p { color: rgba(255,255,255,.77); font-size: 12px; height: 22px; line-height: 22px; padding: 0 12px; }
+.footer p a{color: #FFFFFF;}

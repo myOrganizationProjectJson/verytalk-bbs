@@ -1,0 +1,177 @@
+
+<table class="tb tb2 ">
+	<tbody>
+		
+		<tr>
+			<td colspan="15" style="border-top:0;">
+			 <div class="monitorchart" id="container"></div>
+			</td>
+		</tr>
+		
+	</tbody>
+</table>
+
+
+<table class="tb tb2 borB"><colgroup><col style="width:100px;">
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                        </colgroup>
+	<thead>
+	<tr class="partition">
+		<th>{lang chaoji_com:report8_1}</th>
+		<th class="tc">{lang chaoji_com:alexa_rank}</th>
+		<th class="tc">{lang chaoji_com:traffic_rank1}</th>
+		<th class="tc">{lang chaoji_com:rank_trend1}</th>
+		<th class="tc">{lang chaoji_com:visit_rank1}</th>
+		<th class="tc">{lang chaoji_com:rank_trend1}</th>
+		<th class="tc">{lang chaoji_com:pageviews_rank1}</th>
+		<th class="tc">{lang chaoji_com:rank_trend1}</th>
+	</tr>
+	</thead>
+	<tbody id="list-1">
+		{lang chaoji_com:loading1}
+	</tbody>
+	{subtemplate chaoji_com:searchdaywrap}
+</table>			
+		
+<script type="text/javascript">
+
+    var chart;var cjDay = "{lang chaoji_com:text1}";
+    jq(document).ready(function () {
+		jq.getJSON('{CJ_MONITOR_ALEXADATA_URL}&formhash={FORMHASH}&begindate={$st}&enddate={$et}', function(json){
+			// 如果没有数据
+			if(json.code != 0){
+				jq('#list-1').html('<tr>\
+			<td colspan="15">{lang chaoji_com:nodata1}</td>\
+		</tr>');
+			}else{
+				var str = '';
+				var data = json.data;
+				if(data.issearchday){
+					jq('#searchday').html(data.typeinfo.historydays);
+					jq('#searchdaywrap').show();
+				}
+				if(!data.typeinfo.isexport){
+					jq('#exportlink').hide();
+				}				
+				var dates = data.createdates;
+				var newarr = new Array;
+				for(var i=0; i < dates.length; i++){
+					var trstyle = '';
+					if(i % 2 == 0){
+						trstyle = 'none';
+					}else{
+						trstyle = '#FBFAF8';
+					}
+					str += '<tr class="hover" style="background-color:' + trstyle + ';">\
+						<td>' + chaoji_formatdate(dates[i]) + '</td>\
+						<td class="tc">' + chaoji_render_data(dates[i], data.currentdate, chaoji_alexaformat(data.datalist[0].datas[i]), 'http://alexa.chinaz.com/?domain=' + chaojiapp_getcookie('chaojiapp_domain')) + '</td>\
+						<td class="tc">' + chaoji_alexaformat(data.datalist[1].datas[i]) + '</td>\
+						<td class="tc">' + chaoji_alexatrendformat(data.datalist[1].trends[i]) + '</td>\
+						<td class="tc">' + chaoji_alexaformat(data.datalist[2].datas[i]) + '</td>\
+						<td class="tc">' + chaoji_alexatrendformat(data.datalist[2].trends[i]) + '</td>\
+						<td class="tc">' + chaoji_alexaformat(data.datalist[3].datas[i]) + '</td>\
+						<td class="tc">' + chaoji_alexatrendformat(data.datalist[3].trends[i]) + '</td>\
+					</tr>';
+					
+					newarr[dates[i]] = [{'name':data.datalist[0].name, 'data':chaoji_dataformat(data.datalist[0].datas[i])}, {'name':data.datalist[1].name, 'data':chaoji_dataformat(data.datalist[1].datas[i]),'trends':data.datalist[1].trends[i]}, {'name':data.datalist[2].name, 'data':chaoji_dataformat(data.datalist[2].datas[i])}, {'name':data.datalist[3].name,'data':chaoji_dataformat(data.datalist[3].datas[i])}];
+				}
+				
+				var reverse_arr = chaoji_array_reverse(newarr);
+				
+				var chart_categories = new Array;
+				var chart_series = new Array;
+				var temparr = new Array([], [], [], []);
+				var tempnamearr = new Array([], [], [], []);
+				for(key in reverse_arr){
+					chart_categories.push(key);
+					tempnamearr[0] = reverse_arr[key][0].name;
+					temparr[0].push(reverse_arr[key][0].data);
+					tempnamearr[1] = reverse_arr[key][1].name;
+					temparr[1].push(reverse_arr[key][1].data);
+					tempnamearr[2] = reverse_arr[key][2].name;
+					temparr[2].push(reverse_arr[key][2].data);
+					tempnamearr[3] = reverse_arr[key][3].name;
+					temparr[3].push(reverse_arr[key][3].data);
+				}
+				var extremes = test_get_min(temparr[3]);
+				var series = '';
+				for(var j=0; j < temparr.length; j++){
+					series += '{"name":"' + tempnamearr[j] + '", "data":[' + temparr[j].join(',') + ']},';
+				}
+				
+				chart_series = eval('([' + series.substring(0, series.length - 1) + '])');
+				
+				jq('#list-1').html(str);
+				jq('#container').highcharts({
+					chart: {
+						height: 300,
+						defaultSeriesType: 'spline'
+					},
+					credits: {
+						enabled: false
+					},
+					title: {
+						text: ''
+					},
+					xAxis: {
+						categories: chart_categories,
+						tickInterval:(chart_categories.length/7<1)?1:(parseInt(chart_categories.length/7)*2),
+						labels: {
+							style: {
+								align: 'right',
+								width: '80px',
+								color: '#666',
+								font: 'normal 12px {lang chaoji_com:songti}'
+							},
+							x: 10,
+							y: 18
+						}
+					},
+					yAxis: {
+						min: extremes.min,
+						max: extremes.max,
+						tickInterval: extremes.tickInterval,
+						title: {
+							text: ''
+						},
+						labels: {
+							formatter: function () {
+								return (this.value > 10) ? this.value : (this.value + 0)
+							},
+							style: { font: 'normal 12px {lang chaoji_com:songti}' }
+						},
+						reversed:true
+					},
+					tooltip: {
+						formatter: function () {
+							var s = '<b>'+ this.x +"({lang chaoji_com:week1}"+cjDay.charAt(new Date(this.x.replace(/-/g, "/")).getDay())+")" +'</b>';
+                                            jQuery.each(this.points, function(i, point) {
+                                                s += '<br/><span style="color:'+point.series.color+'">'+ point.series.name +'</span>: '+
+                                                    point.y;
+                                            });
+                                            return s;
+	
+						},
+						shared:true,
+						crosshairs:true
+					},
+					legend: {
+						layout: 'horizontal',
+						align: 'center',
+						verticalAlign: 'bottom',
+						margin: 20,
+						borderWidth: 1,
+						legendItemClick: legendItemClick
+					},
+					series:chart_series
+
+				});				
+			}
+		});
+    });
+</script>		
+						

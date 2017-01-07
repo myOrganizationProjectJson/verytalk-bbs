@@ -1,0 +1,6 @@
+ <html>  <head>     <script type="text/javascript" src="__ROOT__/Tpl/default/Public/jquery.js"></script>  </head>
+ <div>   <script type="text/javascript" language="JavaScript">          var i=0;          var y=0;		   $(document).ready(function(){			   setInterval(function() { set(); },3000);		   });		/*请求函数的ajax*/		function Push() {				$.ajax({				    type : "POST",				    url  : "/rand_tool/index.php/Email/seelogajax",				    success:function(response,textStatus,jqHXR){				    	$('#very').html(response);				      }				   });					y++;				console.log(y);		}				function set(){			if(10>i){			 setInterval(function() { Push(); },3000);			 i++;			 console.log(i);			}		}		    </script>
+     <span>发送信息</span></br></br>     <div id="very">	     <table>
+	     <tr>		      <th>id</th>		      <th>toemail</th>		      <th>info</th>		      <th>time</th>		      <th>status</th>	     </tr>	     <volist name="data" id="vo">	      <tr id="ceshi">		      <td>{$vo.id}</td>		      <td>{$vo.toemail}</td>		      <td>{$vo.info}</td>		      <td>{$vo.time}</td>		      <td>{$vo.status}</td>	     </tr>	     </volist>	     </table>     </div>
+ </div>
+ </html>

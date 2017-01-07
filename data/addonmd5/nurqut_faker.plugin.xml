@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[nurqut_faker.plugin]]></item>
+	<item id="RevisionID"><![CDATA[43916]]></item>
+	<item id="SN"><![CDATA[20141217135llZ5xWeqQ]]></item>
+	<item id="RevisionDateline"><![CDATA[1416189601]]></item>
+	<item id="Data">
+		<item id="/discuz_plugin_nurqut_faker_SC_GBK.xml"><![CDATA[e3f6a4b25f6054634d96d5acdd683895]]></item>
+		<item id="/discuz_plugin_nurqut_faker_SC_UTF8.xml"><![CDATA[c6ec2a5b6ba41d6df6d5b6c531987e8f]]></item>
+		<item id="/discuz_plugin_nurqut_faker_TC_BIG5.xml"><![CDATA[50b7ac53b8c49c87500fbc7dfd966f9b]]></item>
+		<item id="/discuz_plugin_nurqut_faker_TC_UTF8.xml"><![CDATA[ce76cc21eed69196171f8dd490a07252]]></item>
+		<item id="/faker.class.php"><![CDATA[41928546e2f0cb53202bff417639eeef]]></item>
+	</item>
+</root>

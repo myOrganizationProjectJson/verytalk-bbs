@@ -1,0 +1,94 @@
+<!--{template common/header}-->
+<div class="nav_index">
+  <nav>
+    <ul>
+      <li><a href="#">论坛</a></li>
+      <li><a href="#">站报</a></li>
+      <li><a href="#">视频</a></li>
+      <li><a href="#">任务</a></li>
+      <li><a href="#">友链</a></li>
+      <li><a href="#">模版</a></li>
+      <li><a href="#">特效</a></li>
+      <li><a href="#">教程</a></li>
+      <li><a href="#">公告</a></li>
+      <li><a href="#">搜索</a></li>
+    </ul>
+  </nav>
+</div>
+<style type="text/css">
+.list {margin: 13px 10px;}
+/*tab选项卡*/
+.tabBox{ margin:10px auto; background: #FFF;  }
+.tabBox .hd{ height:40px; line-height:40px; font-size:20px; overflow:hidden;border-top:1px solid #ccc;  padding:0 10px;  }
+.tabBox .hd h3{ float:left; font-size:24px; }
+.tabBox .hd h3 span{color:#ccc; font-family:Georgia; margin-left:10px;  }
+.tabBox .hd ul{ float:right;  }
+.tabBox .hd ul li{ float:left;  padding:0 5px; vertical-align:top;  }
+.tabBox .hd ul li.on a{ color:#B63B34; display:block; height:38px; line-height:38px;   border-bottom:2px solid #B63B34;  }
+.tabBox .bd ul{ padding:10px;  }
+.tabBox .bd ul li{ border-bottom:1px dotted #ddd;  }
+.tabBox .bd li a{ -webkit-tap-highlight-color:rgba(0,0,0,0); } 
+.tabBox .bd .con ul li{ height: 40px; line-height: 40px; margin: 0 10px; border-top: 1px solid #e6e6e6 }
+.tabBox .bd .con ul li a { display: block; padding: 0 20px 0 10px; color: #91979f; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tabBox .bd .con ul li a:before { content: ""; float: right; width: 10px; height: 10px; margin-top: 20px; margin-right: -20px; border-top: 2px solid #ccc; border-right: 2px solid #ccc; -webkit-transform: rotate(45deg); transform: rotate(45deg); -webkit-transform-origin: right top; transform-origin: right top; }
+.readMore { color: #575757; text-align: center; display: block; border: 1px solid #B4B4B4; background-color: #fff; height: 35px; line-height: 35px; -webkit-border-radius: 1px; }
+
+</style>
+<div class="list"> 
+<!--DIV滚动图调用-->
+<!--{block/3}-->
+<!--DIV热门热门-->
+<!--{block/4}--> 
+  <div id="tabBox1" class="tabBox">
+    <div class="hd">
+      <h3><a href="#">图文</a><span>Zone</span></h3>
+      <ul>
+        <li><a href="javascript:void(0)">自然</a></li>
+        <li><a href="javascript:void(0)">社会</a></li>
+        <li><a href="javascript:void(0)">人文</a></li>
+      </ul>
+    </div>
+    <div class="bd" id="tabBox1-bd">
+      <div class="con">
+      <!--tab选项卡列表1-->
+       <!--{block/8}-->
+      </div>
+      <div class="con">
+      <!--tab选项卡列表2-->
+        <!--{block/9}-->
+      </div>
+      <div class="con">
+      <!--tab选项卡列表3-->
+       <!--{block/10}-->
+      </div>
+    </div>
+  </div>
+  <a class="readMore" href="#">进入频道&gt;&gt;</a> 
+  <script type="text/javascript">
+			TouchSlide( { slideCell:"#tabBox1",
+
+				endFun:function(i){ 
+					var bd = document.getElementById("tabBox1-bd");
+					bd.parentNode.style.height = bd.children[i].children[0].offsetHeight+"px";
+					if(i>0)bd.parentNode.style.transition="200ms";
+				}
+
+			} );</script> 
+</div>
+<div class="youlian">
+  <h3>友情连接</h3>
+  <ul>
+    <li><a href="#">站长</a></li>
+    <li><a href="#">源码</a></li>
+    <li><a href="#">百事</a></li>
+    <li><a href="#">卫国</a></li>
+    <li><a href="#">七五</a></li>
+    <li><a href="#">统计</a></li>
+    <li><a href="#">梦想</a></li>
+    <li><a href="#">联盟</a></li>
+    <li><a href="#">游呱</a></li>
+    <li><a href="#">新势</a></li>
+  </ul>
+</div>
+<div class="pullrefresh" style="display:none;"></div>
+<!--{template common/footer}--> 

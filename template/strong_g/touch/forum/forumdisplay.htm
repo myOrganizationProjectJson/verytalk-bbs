@@ -1,0 +1,73 @@
+
+<!--{template common/header}-->
+
+  <div class="s_dbdh">
+	<div class="s_logo">
+		<a href="forum.php?forumlist=1"><img src="./template/strong_g/touch/images/s_back.png"/></a>
+		<span onclick="do_slidesub();"><!--{if $subexists}--><img src="./template/strong_g/touch/images/s_bottomj.png"/><!--{/if}-->{echo cutstr(strip_tags($_G['forum']['name']),12)}</span>
+	</div>
+	<div class="right">
+		<a href="#"><img src="./template/strong_g/touch/images/s_shoucang.png"/></a>
+		<a href="forum.php?mod=post&action=newthread&fid=$_G[fid]"><img src="./template/strong_g/touch/images/s_send.png"/></a>
+	</div>
+</div>
+<div  class="g_mbx cl">
+	<div class="z">
+		<a href="./" class="nvhm" title="{lang homepage}">{lang homepage}</a><em>&rsaquo;</em><a href="forum.php?forumlist=1&mobile=2">{$_G[setting][navs][2][navname]}</a>$navigation
+	</div>
+</div>
+
+
+
+<!-- header end -->
+<script type="text/javascript">
+function do_slidesub(){$('#subname_list').toggle();}
+</script>
+<!--{hook/forumdisplay_top_mobile}-->
+
+<!-- main threadlist start -->
+<!--{if !$subforumonly}-->
+<div class="threadlist " >
+			<ul>
+			<!--{if $_G['forum_threadcount']}-->
+				<!--{loop $_G['forum_threadlist'] $key $thread}-->
+					<!--{if !$_G['setting']['mobile']['mobiledisplayorder3'] && $thread['displayorder'] > 0}-->
+						{eval continue;}
+					<!--{/if}-->
+                	<!--{if $thread['displayorder'] > 0 && !$displayorder_thread}-->
+                		{eval $displayorder_thread = 1;}
+                    <!--{/if}-->
+					<!--{if $thread['moved']}-->
+						<!--{eval $thread[tid]=$thread[closed];}-->
+					<!--{/if}-->
+					<li>
+					<!--{hook/forumdisplay_thread_mobile $key}-->
+                    <a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra" $thread[highlight] >
+                    <!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+						<span class=""><img src="./template/strong_g/touch/images/icon_top.png" /></span>
+					<!--{elseif $thread['digest'] > 0}-->
+						<span class=""><img src="./template/strong_g/touch/images/s_jinghua.png" /></span>
+					<!--{elseif $thread['attachment'] == 2 && $_G['setting']['mobile']['mobilesimpletype'] == 0}-->
+						<span class=""><img src="./template/strong_g/touch/images/icom_pic.png" /></span>
+					<!--{/if}-->
+					{$thread[subject]}
+	
+					<span class="by">$thread[author]&nbsp;&nbsp; $thread[lastpost]</span>
+					</a>
+					<span class="num">{$thread[replies]}/{$thread[views]}</span>
+
+					</li>
+                <!--{/loop}-->
+            <!--{else}-->
+			<li style="margin:20px;">{lang forum_nothreads}</li>
+			<!--{/if}-->
+		</ul>
+</div>
+
+
+
+<!-- main threadlist end -->
+<!--{hook/forumdisplay_bottom_mobile}-->
+<!--{/if}-->
+<div class="pullrefresh" style="display:none;"></div>
+<!--{template common/footer}-->

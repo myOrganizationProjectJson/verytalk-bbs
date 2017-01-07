@@ -1,0 +1,328 @@
+
+<table class="tb tb2 ">
+	<tbody>
+		
+		<tr>
+			<td colspan="15" style="border-top:0;">
+			 <div class="monitorchart" id="container"></div>
+			</td>
+		</tr>
+		
+	</tbody>
+</table>
+
+<table class="tb tb2 borB">
+	<colgroup><col width="100px">
+                        <col>
+                        <col width="110px">
+                        <col>
+                        <col>
+						<col>
+                        <col width="100px">
+                        </colgroup>
+	<thead>
+	<tr class="partition">
+		<th width="100">{lang chaoji_com:report8_1}</th>
+		<th class="tc">{lang chaoji_com:baidu}</th>
+		<th class="tc">{lang chaoji_com:baiduindexnum}</th>
+		<th class="tc">{lang chaoji_com:google}</th>
+		<th class="tc">{lang chaoji_com:qihu}</th>
+		<th class="tc">{lang chaoji_com:sogou}</th>
+		<th class="tc" style="position:relative;">{lang chaoji_com:day_trend}<div class="unknown_box" id="unknown_pos" style="left:74px;position:absolute;">
+									<span class="unknown">?</span>
+									<span class="unknown_icon"></span>
+									<div class="unknown_main">
+										<p>{lang chaoji_com:unknown1}</p>
+									</div>	
+								</div>
+</th>
+	</tr>
+	</thead>
+	<tbody id="table-list1">
+		{lang chaoji_com:loading1}
+	</tbody>
+	
+	{subtemplate chaoji_com:searchdaywrap}
+</table>
+<textarea id="tempdata" style="display:none;"></textarea>
+<script type="text/javascript">
+    var chart;var cjDay = "{lang chaoji_com:text1}";
+    jq(document).ready(function () {
+		jq.getJSON('{CJ_MONITOR_SITE_URL}&formhash={FORMHASH}&begindate={$st}&enddate={$et}', function(json){
+			// 如果没有数据
+			if(json.code > 0){
+				jq('#table-list1').html('<tr>\
+			<td colspan="15">{lang chaoji_com:nodata1}</td>\
+		</tr>');
+			}else{
+				var data = json.data;
+				if(data.issearchday){
+					jq('#searchday').html(data.typeinfo.historydays);
+					jq('#searchdaywrap').show();
+				}
+				if(!data.typeinfo.isexport){
+					jq('#exportlink').hide();
+				}
+				var str = '';
+				var dates = data.createdates;
+				var newarr = new Array;
+				for(var i=0; i < dates.length; i++){
+					var trstyle = '';
+					if(i % 2 == 0){
+						trstyle = 'none';
+					}else{
+						trstyle = '#FBFAF8';
+					}
+					var str2 = '';
+					if(data.datalist[0].pageschangeds[i]){
+						str2 = '<span class="unfold_update detail" title="{lang chaoji_com:24hoursupdate}" data-date="' + dates[i] + '" data-trstyle="' + trstyle + '" data-oldtrendclass="unfold_update" data-newtrendclass=""></span>';
+					}else{
+						str2 = '<span class="unfold_no detail" title="{lang chaoji_com:24hoursno}" data-date="' + dates[i] + '" data-trstyle="' + trstyle + '" data-oldtrendclass="unfold_no" data-newtrendclass=""></span>';
+					}					
+					str += '<tr class="hover" style="background-color:' + trstyle + ';">\
+						<td>' + chaoji_formatdate(dates[i]) + '</td>\
+						<td class="tc">' + chaoji_render_data(dates[i], data.currentdate, chaoji_formatnumber(data.datalist[0].datas[i]), 'http://www.baidu.com/s?wd=site%3A' + chaojiapp_getcookie('chaojiapp_domain')) + '</td>\
+						<td class="tc">' + chaoji_render_data(dates[i], data.currentdate, chaoji_formatnumber(data.datalist[1].datas[i]), 'http://www.baidu.com/s?wd=site%3A' + chaojiapp_getcookie('chaojiapp_domain')) + '</td>\
+						<td class="tc">' + chaoji_render_data(dates[i], data.currentdate, chaoji_formatnumber(data.datalist[2].datas[i]), 'http://www.google.com.hk/search?hl=zh-CN&q=site%3A' + chaojiapp_getcookie('chaojiapp_domain')) + '</td>\
+						<td class="tc">' + chaoji_render_data(dates[i], data.currentdate, chaoji_formatnumber(data.datalist[3].datas[i]), 'http://www.so.com/s?q=site%3A' + chaojiapp_getcookie('chaojiapp_domain')) + '</td>\
+						<td class="tc">' + chaoji_render_data(dates[i], data.currentdate, chaoji_formatnumber(data.datalist[4].datas[i]), 'http://www.sogou.com/web?query=site%3A' + chaojiapp_getcookie('chaojiapp_domain')) + '</td>\
+						<td class="tc">' + str2 + '</td>\
+					</tr><tr style="display:none;" class="chart-detail"><td colspan="15" style="border-top:0;"></td></tr>';
+					
+					newarr[dates[i]] = [{'name':data.datalist[0].name, 'data':chaoji_dataformat(data.datalist[0].datas[i])}, {'name':data.datalist[1].name, 'data':chaoji_dataformat(data.datalist[1].datas[i])}, {'name':data.datalist[2].name, 'data':chaoji_dataformat(data.datalist[2].datas[i])}, {'name':data.datalist[3].name,'data':chaoji_dataformat(data.datalist[3].datas[i])}, {'name':data.datalist[4].name,'data':chaoji_dataformat(data.datalist[4].datas[i])}];
+				}
+				
+				var reverse_arr = chaoji_array_reverse(newarr);
+				
+				var chart_categories = new Array;
+				var chart_series = new Array;
+				var temparr = new Array([],[],[],[],[]);
+				var tempnamearr = new Array([],[],[],[],[]);
+				for(key in reverse_arr){
+					chart_categories.push(key);
+					tempnamearr[0] = reverse_arr[key][0].name;
+					temparr[0].push(reverse_arr[key][0].data);
+					tempnamearr[1] = reverse_arr[key][1].name;
+					temparr[1].push(reverse_arr[key][1].data);
+					tempnamearr[2] = reverse_arr[key][2].name;
+					temparr[2].push(reverse_arr[key][2].data);
+					tempnamearr[3] = reverse_arr[key][3].name;
+					temparr[3].push(reverse_arr[key][3].data);
+					tempnamearr[4] = reverse_arr[key][4].name;
+					temparr[4].push(reverse_arr[key][4].data);
+				}
+				var extremes = test_get_min(temparr[0]);
+				var series = '';
+				for(var j=0; j < temparr.length; j++){
+					series += '{"name":"' + tempnamearr[j] + '", "marker":{"symbol":"circle"}, "data":[' + temparr[j].join(',') + ']},';
+				}
+				
+				chart_series = eval('([' + series.substring(0, series.length - 1) + '])');
+				jq('#table-list1').html(str);
+				//console.log(selection1);
+				jq('#container').highcharts({
+					chart: {
+						height: 300,
+						defaultSeriesType: 'spline'
+					},
+					credits: {
+						enabled: false
+					},
+					title: {
+						text: ''
+					},
+					xAxis: {
+						categories: chart_categories,
+						tickInterval:(chart_categories.length/7<1)?1:(parseInt(chart_categories.length/7)*2),
+						labels: {
+							
+							style: {
+								align: 'right',
+								width: '80px',
+								color: '#666',
+								font: 'normal 12px {lang chaoji_com:songti}'
+							},
+							x: 10,
+							y: 18
+						}
+					},
+					yAxis: {
+						min: extremes.min,
+						max: extremes.max,
+						tickInterval: extremes.tickInterval,
+						title: {
+							text: ''
+						},
+						labels: {
+							formatter: function () {
+								return (this.value < 0) ? 0 : this.value
+							},
+							style: { font: 'normal 12px {lang chaoji_com:songti}' }
+						}
+					},
+					tooltip: {
+						formatter: function () {
+							return '<b>' + this.x + "({lang chaoji_com:week1}" + cjDay.charAt(new Date(this.x.replace(/-/g, "/")).getDay()) + ")" + '</b><br/>' +
+								this.series.name + ': ' + this.y;
+						}
+					},
+					legend: {
+						layout: 'horizontal',
+						align: 'center',
+						verticalAlign: 'bottom',
+						margin: 20,
+						borderWidth: 1,
+						itemWidth: 80,
+						legendItemClick: legendItemClick
+					},
+					series:chart_series
+
+				});
+				chart = jq('#container').highcharts();
+				if (chart != undefined && chart.series != undefined) {
+					showOneSerie(chart);
+				}
+				else {
+					var timer = setInterval(
+					function () {
+						if (chart != undefined && chart.series != undefined) {
+							clearInterval(timer);
+							showOneSerie(chart);
+						}
+					}, 10);
+				}				
+			}
+		});
+		
+		jq('.detail').live('click', function(){
+			var curobj = jq(this);
+			var oldclass = curobj.attr('data-oldtrendclass');
+			var newclass = curobj.attr('data-newtrendclass');
+			var osiblings = curobj.parent().parent().siblings('.chart-detail');
+			jq.each(osiblings, function(i, n){
+				var n = jq(n);
+				var childn = n.prev('tr').children('td').children('.detail');
+				childn.removeClass('unfold_show');
+				childn.addClass(childn.attr('data-oldtrendclass'));
+				childn.attr('data-newtrendclass', '');
+				n.hide();
+			});
+			if(oldclass == newclass){
+				curobj.removeClass(newclass).addClass(oldclass);
+				curobj.attr('data-newtrendclass', '');
+				var trobj = curobj.parent('td').parent('tr').next('tr');
+				trobj.hide();
+			}else{
+				curobj.attr('data-newtrendclass', oldclass);
+				curobj.removeClass(oldclass).addClass('unfold_show');
+				var trstyle = curobj.attr('data-trstyle');
+				var trobj = curobj.parent('td').parent('tr').next('tr');
+				trobj.css('background-color', trstyle);
+				var searchDate = curobj.attr('data-date');
+				trobj.children('td').html('<table width="100%"><tr class="baiduChart even" id="seo-general-baidupages-detail' + searchDate + '" style="position:relative;"><td colspan="15" style="text-align:center;"><div class="clearfix"><div class="image chartwrap" id="containerWebsiteData' + searchDate + '">{lang chaoji_com:loading2}</div></div></td></tr></table>');
+				trobj.show();
+				jq.getJSON('{CJ_MONITOR_SITE_DATE_URL}&searchdate=' + searchDate + '&formhash={FORMHASH}', function(json){
+					var data = json.data;
+						var Data = data;
+						var chart1;
+						
+						var series = '';
+						var sdata1 = new Array;
+						for(var i=0; i< Data.datalist.length; i++){
+							var str = '';
+							if(i == 0) sdata1 = Data.datalist[i].datas;
+							for(var j=0; j < Data.datalist[i].datas.length; j++){
+								str += (Data.datalist[i].datas[j] ? Data.datalist[i].datas[j] : 'null') + ',';
+							}
+							series += '{"name":"' + Data.datalist[i].name + '", "symbol":"circle", "data":[' + jq.trim(str, ',') + ']},';
+						}
+						var extremes = test_get_min(sdata1);
+						var chart_categories = new Array;
+						for(var j=0; j< 24; j++){
+							chart_categories.push(j + ':00');
+						}
+						var chart_series = eval('([' + series.substring(0, series.length - 1) + '])');
+						jq('#containerWebsiteData' + searchDate).highcharts({
+							chart: {
+								height: 150,
+								renderTo: 'containerWebsiteData' + searchDate,
+								defaultSeriesType: 'spline',
+								backgroundColor: trstyle
+							},
+							credits: {
+								enabled: false
+							},
+							title: {
+								text: ''
+							},
+							xAxis: {
+								categories: chart_categories,
+								tickInterval:(chart_categories.length/7<1)?1:(parseInt(chart_categories.length/7)*2),
+								labels: {
+									step:1,
+									style: {
+										align: 'right',
+										width: '80px',
+										color: '#666',
+										font: 'normal 12px {lang chaoji_com:songti}'
+									},
+									x: 10,
+									y: 18
+								}
+							},
+							yAxis: {
+								min: extremes.min,
+								max: extremes.max,
+								tickInterval: extremes.tickInterval,
+								title: {
+									text: ''
+								},
+								labels: {
+									formatter: function () {
+										return this.value;
+									},
+									style: { font: 'normal 12px {lang chaoji_com:songti}' }
+								}
+
+							}
+													   ,
+							tooltip: {
+								formatter: function () {
+									var s = '{lang chaoji_com:update_time}(<span style="color:red;">' + Data.updatedates[this.points[0].point.x] + '</span>)';
+
+									jQuery.each(this.points, function (i, point) {
+										s += '<br/><span style="color:' + point.series.color + '">' + point.series.name + '</span>: ' + point.y;
+									});
+									return s;
+								},
+								shared: true,
+								crosshairs: true
+							},
+							legend: {
+								layout: 'vertical',
+								align: 'left',
+								verticalAlign: 'left',
+								borderWidth: 1,
+								itemWidth: 80,
+								y: 25,
+								legendItemClick: legendItemClick
+							},
+							series: chart_series
+						});
+						chart1 = jq('#containerWebsiteData' + searchDate).highcharts();
+						var length=chart1.series.length;
+						for(var i=0;i<length;i++)
+						{
+							chart1.series[i].hide();
+						}
+						chart1.series[0].show();
+						if (Data.nodata) {
+							jq('#containerWebsiteData' + searchDate).append(" <div class='chart-empty'>{lang chaoji_com:nodata}</div>");
+						}
+				});				
+			}
+		});
+		
+    });
+</script>
+						

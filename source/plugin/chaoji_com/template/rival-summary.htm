@@ -1,0 +1,99 @@
+
+<div class="clearfix clear rival-sites">
+    <div class="title">{lang chaoji_com:rival-sites}{lang chaoji_com:maohao}</div>
+    <ul id="j-rival-sites1"><!--{loop $jsondata['rivalsitelist'] $rivalsite}-->
+                                                <li><a class="active" href="javascript:void(0);">{eval echo chaojiapp_code($rivalsite['websitename'])}</a></li>
+												<!--{/loop}-->
+                                                    </ul>
+</div>
+
+<table class="tb tb2"><tr><td style="border-top:0px;">
+<div class="data-rivalcompare">
+                    <table id="table-rivalsites" class="table-2 table-rivalsites">
+                        <colgroup><col class="item">
+                                                                        <col class="site">
+                                                <!--{loop $jsondata['rivalsitelist'] $rivalsite}-->
+                                                <col class="site">
+												<!--{/loop}-->
+												<!--{if CJ_RIVAL_SITE_NUM > $jsondata['rivalcount']}-->
+												<!--{eval for($i=0; $i < (CJ_RIVAL_SITE_NUM - $jsondata['rivalcount']); $i++){ }-->
+												<col class="site">
+												<!--{eval } }-->
+												<!--{/if}-->
+                                                </colgroup><thead id="j-rival-sites2">
+                        <tr class="thead-rival">
+                            <th class="datarival-item"><div class="box box-center">{lang chaoji_com:datarival-item}</div></th>
+                                                                                    <th class="datarival-site"><div class="clearfix box box-center"> 
+                                                                <span class="ellipsis" style="color:{$jsondata['monitorsite']['color']}" title="{eval echo chaojiapp_code($jsondata['monitorsite']['websitename'])}">{eval echo chaojiapp_code($jsondata['monitorsite']['websitename'])}</span>
+                            </div></th>
+							<!--{loop $jsondata['rivalsitelist'] $rivalsite}-->
+							
+                                                        <th class="datarival-site"><div class="clearfix box box-center"> 
+                                                                <a class="del" href="javascript:void(0);" title="{lang chaoji_com:delete}">{lang chaoji_com:delete}</a>
+                                                                <span class="ellipsis" style="color:{$rivalsite['color']}" title="{eval echo chaojiapp_code($rivalsite['websitename'])}">{eval echo chaojiapp_code($rivalsite['websitename'])}</span>
+                            </div></th>
+							
+							<!--{/loop}-->
+							
+							<!--{if CJ_RIVAL_SITE_NUM > $jsondata['rivalcount']}-->
+							<!--{eval for($i=0; $i < (CJ_RIVAL_SITE_NUM - $jsondata['rivalcount']); $i++){ }-->
+                                                        <th class="datarival-site"><div class="clearfix box box-center"> 
+                                                                <span class="ellipsis" style="color:${item.DataColor}" title=""></span>
+                            </div></th>
+                               <!--{eval } }-->
+							   <!--{/if}-->
+                                                    </tr>
+                        </thead>
+                    </table>
+					<div class="clearfix"></div>
+                    <table id="table-rivaldata" class="table-2 borB">
+                        <colgroup><col class="item">
+                                                                        <col class="site">
+                                                <!--{loop $jsondata['rivalsitelist'] $rivalsite}-->
+                                                <col class="site">
+												<!--{/loop}-->
+												<!--{if CJ_RIVAL_SITE_NUM > $jsondata['rivalcount']}-->
+												<!--{eval for($i=0; $i < (CJ_RIVAL_SITE_NUM - $jsondata['rivalcount']); $i++){ }-->
+												<col class="site">
+												<!--{eval } }-->
+												<!--{/if}-->
+                                                </colgroup>
+						
+						<tbody class="j-zebra">
+						<tr>
+							<td class="datarival-item">
+								<div class="box">{lang chaoji_com:rival-host}</div>
+							</td>
+							<td class="datarival-site"><div class="box box-center"><a href="http://{$jsondata['monitorsite']['host']}" target="_blank">{$jsondata['monitorsite']['host']}</a></div></td>
+							<!--{loop $jsondata['rivalsitelist'] $rivalsite}-->
+                                                                                                                <td class="datarival-site"><div class="box box-center"><a href="http://{$rivalsite['host']}" target="_blank">{$rivalsite['host']}</a></div></td>
+                                                                                                               <!--{/loop}-->
+																											   <!--{if CJ_RIVAL_SITE_NUM > $jsondata['rivalcount']}-->
+																					<!--{eval for($i=0; $i < (CJ_RIVAL_SITE_NUM - $jsondata['rivalcount']); $i++){ }-->
+																					<td class="datarival-site"><div class="box box-center">&nbsp;</div></td>
+																					<!--{eval } }-->
+																					<!--{/if}-->
+						</tr>
+						<!--{loop $jsondata['monitorsite']['datas'] $key1 $data}-->
+                        <tr {if $key1 % 2 == 0}class="even" style="background-color:#FBFAF8;"{/if}>
+                            <td class="datarival-item"><div class="box">{eval echo chaojiapp_code($data['name'])}</div></td>
+                                                                                    <td class="datarival-site"><div class="box box-center"><a href="{eval echo sprintf($link_array[chaojiapp_code($data['name'])], $jsondata['monitorsite']['host'])}" target="_blank">{eval echo chaojiapp_formatnumber($data['data'])}</a></div></td>
+																					<!--{loop $jsondata['rivalsitelist'] $rivalsite}-->
+                                                                                                                <td class="datarival-site"><div class="box box-center"><a href="{eval echo sprintf($link_array[chaojiapp_code($data['name'])], $rivalsite['host'])}" target="_blank">{eval echo chaojiapp_formatnumber($rivalsite['datas'][$key1]['data'])}</a></div></td>
+																						<!--{/loop}-->
+																					<!--{if CJ_RIVAL_SITE_NUM > $jsondata['rivalcount']}-->
+																					<!--{eval for($i=0; $i < (CJ_RIVAL_SITE_NUM - $jsondata['rivalcount']); $i++){ }-->
+																					<td class="datarival-site"><div class="box box-center">&nbsp;</div></td>
+																					<!--{eval } }-->
+																					<!--{/if}-->																						
+                                                                                </tr>
+                        <!--{/loop}-->
+                        </tbody>
+                    </table>
+                    <div class="toolbar">
+                                                <a class="btn" href="{CJ_PLUGIN_URL}pmod=rival&op=rival-site-list">{lang chaoji_com:rival-sites-manage}</a>
+                        <a class="btn btn-add" data-type="add" data-title="{lang chaoji_com:add-rival-site}" href="{CJ_PLUGIN_URL}pmod=setting&op=add-rival-site" onclick="open_dialog(this, '{CJ_PLUGIN_URL}pmod=setting&op=add-rival-site');return false;">{lang chaoji_com:rival-sites-add}</a>
+                        
+                                            </div>
+                    </div>
+					</td></tr></table>

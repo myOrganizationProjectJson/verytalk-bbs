@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[guhuiji_mi.template]]></item>
+	<item id="RevisionID"><![CDATA[38015]]></item>
+	<item id="SN"><![CDATA[2014121115uPMfy3Zsw3]]></item>
+	<item id="RevisionDateline"><![CDATA[1405062001]]></item>
+	<item id="Data">
+		<item id="/discuz_style_guhuiji_mi.xml"><![CDATA[f3dae5df0be2c8e69f6a848dbc680205]]></item>
+		<item id="/preview.jpg"><![CDATA[2fbaaf8e7666f9489efab587c59f7ddb]]></item>
+		<item id="/preview_large.jpg"><![CDATA[a96887d24a725695a57862823c1ec886]]></item>
+		<item id="/touch/common/footer.htm"><![CDATA[667d05483b33130f489a305a48c5ccf1]]></item>
+		<item id="/touch/common/header.htm"><![CDATA[8aa0c53db0214fc938e164908fe70874]]></item>
+		<item id="/touch/common/showmessage.htm"><![CDATA[4b3ee538b63a72d703261ad403f7e299]]></item>
+		<item id="/touch/forum/discuz.htm"><![CDATA[0de820fc213b40318bd68c41f4a9ffb2]]></item>
+		<item id="/touch/forum/guide.htm"><![CDATA[bba2777277d78cbb2824875f5c934661]]></item>
+		<item id="/touch/guhuiji/css/common.css"><![CDATA[a6b920f90fb280ee4945dafc6b50f337]]></item>
+		<item id="/touch/guhuiji/img/focusBg.png"><![CDATA[6e012b18f824a7a9e24040b058b688ca]]></item>
+		<item id="/touch/guhuiji/img/header_icon.png"><![CDATA[694b5df69eed81b4fdfd0cc1b54d2646]]></item>
+		<item id="/touch/guhuiji/img/home.png"><![CDATA[c701bcc950e9acbaa4e938a0f075edf3]]></item>
+		<item id="/touch/guhuiji/img/hot.png"><![CDATA[a3f83ae3a5aa70f9a4b9845296c20198]]></item>
+		<item id="/touch/guhuiji/img/logo.png"><![CDATA[5b61b55fc5d02243a6d4f59970644a6a]]></item>
+		<item id="/touch/guhuiji/js/base.js"><![CDATA[446cae1b35eb5ba85e88f37e6a5171f0]]></item>
+		<item id="/touch/guhuiji/js/guhuiji.cn.js"><![CDATA[91bb29c336200c40ec3ee551b3136f0b]]></item>
+		<item id="/touch/guhuiji/js/TouchSlide.1.1.js"><![CDATA[3e95743d48ab5ae9cbeda7114fc5c2c9]]></item>
+		<item id="/touch/home/space_profile.htm"><![CDATA[6d615a6da3cb7f30bc8a1ed8307ff418]]></item>
+		<item id="/touch/search/forum.htm"><![CDATA[0e5b86798cf2f3e434ad587a9d9774ab]]></item>
+	</item>
+</root>

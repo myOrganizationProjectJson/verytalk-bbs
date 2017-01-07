@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=$charset">
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<link href="static/image/admincp/admincp.css?{$_G[style][verhash]}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<script type="text/JavaScript">
+var admincpfilename = '{$basescript}', IMGDIR = '{$IMGDIR}', STYLEID = '{$STYLEID}', VERHASH = '{$VERHASH}', IN_ADMINCP = true, ISFRAME = $frame, STATICURL='static/', SITEURL = '{$_G[siteurl]}', JSPATH = '{$_G[setting][jspath]}';
+</script>
+<script src="{$_G[setting][jspath]}common.js?{$_G[style][verhash]}" type="text/javascript"></script>
+<script src="{$_G[setting][jspath]}admincp.js?{$_G[style][verhash]}" type="text/javascript"></script>
+<div id="append_parent"></div><div id="ajaxwaitid"></div>
+<div class="container" id="cpcontainer"><script src="static/js/calendar.js" type="text/javascript"></script><script type="text/javascript" language="javascript" src="source/plugin/chaoji_com/resource/js/jquery.min.js"></script>
+<script src="source/plugin/chaoji_com/resource/js/artDialog/artDialog.js?skin=default"></script>
+	<script src="source/plugin/chaoji_com/resource/js/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" language="javascript" src="source/plugin/chaoji_com/resource/js/jquery.form.js"></script>
+<script type="text/javascript">var jq = jQuery.noConflict();var disallowfloat = false;</script>
+<script type="text/javascript" src="source/plugin/chaoji_com/resource/js/highcharts.js" language="javascript"></script>
+<script type="text/javascript" src="source/plugin/chaoji_com/resource/js/tableorder.js" language="javascript"></script>
+<script src="source/plugin/chaoji_com/resource/js/template-native.js" type="text/javascript"></script>
+<link href="source/plugin/chaoji_com/resource/css/style.css?{TIMESTAMP}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" language="javascript" src="source/plugin/chaoji_com/resource/js/script.js?{TIMESTAMP}"></script>
+<script type="text/javascript" language="javascript" src="source/plugin/chaoji_com/resource/js/jquery.validate.min.js"></script>
+<style type="text/css">
+.container{padding:0px!important;}	
+</style>
+<div class="dialog">
+<div class="dialog-content">
+    <div class="dbody"  id="balancepayment">
+        <form name="monitorwebsiterenewalserverform" id="monitorwebsiterenewalserverform" action="{CJ_PLUGIN_URL}pmod=setting&op=renewal" method="post">
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+                                    <div class="form" id="monitorwebsite_operate" >
+            <div class="row">
+                <label class="label">{lang chaoji_com:monitor-sites}:</label>
+                <div class="enter">
+                    {eval echo chaojiapp_code($jsondata['monitorwebsite']['websitename']);} | {$jsondata['monitorwebsite']['host']}
+                </div>
+            </div>
+            <div class="row">
+                <label class="label">{lang chaoji_com:typename}:</label>
+                <div class="enter">
+                    {eval echo sprintf(chaojiapp_lang('renew-cur-price'), chaojiapp_code($jsondata['monitorwebsite']['typename']), $jsondata['monitorwebsite']['price']);}
+                </div>
+            </div>
+            <div class="row row-entire">
+                <label class="label">{lang chaoji_com:expiredtime}:</label>
+                <div class="enter">{$jsondata['monitorwebsite']['expiredtime']}</div>
+				<!--{if $jsondata['voucherlist']}-->
+				<div class="enter" style="margin-top:7px;height:26px;" >
+                    <input type="checkbox" name="usevoucheropen" id="usevoucheropen"  onclick="checkIsSelectUseVoucherOpen()" value="1" /> <label for="usevoucheropen">{lang chaoji_com:usevoucher}</label>
+                    <select name="vouchers" id="vouchers" style="display:none" onchange="changeVoucher(this)">
+                        <option value="">{lang chaoji_com:choosevoucher}</option>
+						{loop $jsondata['voucherlist'] $voucher}
+                                                <option value="{$voucher['packagetype']},{$voucher['servicecycle']},{$voucher['voucherid']},{$voucher['servicecycletypebyte']}">{eval echo chaojiapp_code($voucher['showname']);}</option>
+												{/loop}
+                                            </select>
+                </div>
+				<!--{/if}-->
+                             </div><style type="text/css">
+							
+							</style>
+            <div class="row row-entire" id="div_pay_openmonth">
+                <label class="label">{lang chaoji_com:open_month}:</label>
+                <div class="enter" id="div_openmonth" style="position:relative;" >
+                    <span class="options">
+                        <label><input class="radio-vlign" type="radio" name="open_month"  {if $jsondata['monitorwebsite']['openmonth'] == '1'}checked="checked"{/if}   value="1"  /> {lang chaoji_com:open_month_1}</label>
+                        <label><input class="radio-vlign" type="radio" name="open_month"  {if $jsondata['monitorwebsite']['openmonth'] == '3'}checked="checked"{/if}  value="3" /> {lang chaoji_com:open_month_3}</label>
+                        <label><input class="radio-vlign" type="radio" name="open_month"  {if $jsondata['monitorwebsite']['openmonth'] == '6'}checked="checked"{/if}  value="6" /> {lang chaoji_com:open_month_6}</label>
+                        <label><input class="radio-vlign" type="radio" name="open_month" {if $jsondata['monitorwebsite']['openmonth'] == '12'}checked="checked"{/if}  value="12" /> {lang chaoji_com:open_month_12}</label>
+                    </span>
+					<!--{if $jsondata['preferenceinfo']['isseopreference'] && $jsondata['redpacketinfo']['isshowredpacket'] != 1 && $jsondata['monitorwebsite']['typeid'] != 6}-->
+                                        <div class="flag-discount" style="top:-13px;right:80px;" title="{lang chaoji_com:flag-discount-tip}">{lang chaoji_com:flag-discount}</div>
+					<!--{else}-->
+						<!--{if $jsondata['redpacketinfo']['isshowredpacket'] == 1 && ($jsondata['monitorwebsite']['typeid'] == 3 || $jsondata['monitorwebsite']['typeid'] == 4)}-->
+						<div class="flag-anniversary" style="top:-15px;right:50px;" title="{lang chaoji_com:flag-discount-tip}">{lang chaoji_com:flag-anniversary}</div>
+						<!--{/if}-->
+					<!--{/if}-->					
+                                    </div>
+            </div>
+            <div class="row" id="div_pay_expireddate">
+                <label class="label">{lang chaoji_com:expiredtime}:</label>
+                <div class="enter"><span style="color:Red;" id="expireddate"></span></div>
+            </div>
+            <div class="row" id="div_paymoney">
+                <label class="label">{lang chaoji_com:paymoney}:</label>
+                <div class="enter" style="width:77px;">
+                    <span style="color:Red;font-weight:bold;" id="paymoney">0</span> {lang chaoji_com:yuan}
+                </div>
+            </div>
+            <div class="row" id="div_realpaymoney" style="display:none;">
+                <label class="label">{lang chaoji_com:realpaymoney}:</label>
+                <div class="enter" style="width:77px;">
+                    <span style="color:Red;font-weight:bold;" id="realpaymoney">0</span> {lang chaoji_com:yuan}
+                </div>
+            </div>
+            <div class="row" id="div_pay_payment">
+   
+    <div class="comment" id="payment_content">{eval echo sprintf(chaojiapp_lang('leftmoney'), $jsondata['user']['money']);} <a href="http://www.chaoji.com/user/recharge.aspx?accesstoken={eval echo getcookie('chaojiapp_access_token1');}" target="_blank">{lang chaoji_com:recharge}</a></div>
+</div>
+<div class="row" id="div_automaticrenewal">
+    <div class="enter">
+        <input type="checkbox" name="automaticrenewal" id="automaticrenewal" <!--{if $jsondata['monitorwebsite']['autorenewal']}--> checked="checked" <!--{/if}-->  value="1" /> <label for="automaticrenewal">{lang chaoji_com:autorenewtip}</label> , <a href="http://www.chaoji.com/user/automaticrenewal.aspx?type=1&accesstoken={eval echo getcookie('chaojiapp_access_token1');}" target="_blank">{lang chaoji_com:autorenew}</a>
+    </div>
+</div>            <div class="row row-button">
+                <input type="hidden" name="userwebsiteid" value="{$jsondata['monitorwebsite']['uid']}" />
+				<input type="hidden" name="realpaymoney" id="realpaymoney_val" />
+				<input type="hidden" name="leftmoney" id="leftmoney_val" value="{$jsondata['user']['money']}" />
+                <span class="btnwrap btnpositive"><input class="inner" type="submit" name="confirmrenewal" id="confirmrenewal" value="{lang chaoji_com:confirm-renew}" /></span>
+                <span class="btnwrap"><input class="inner" type="button" onclick="art.dialog.close();" value="{lang chaoji_com:cancel}"/></span>
+            </div>
+        </div>
+        </form>
+    </div>
+   </div>
+
+
+</div>
+<script type="text/javascript">
+    var selPackageID = parseInt("{$jsondata['monitorwebsite']['typeid']}");
+    var selOpenMonth = parseInt("{$jsondata['monitorwebsite']['openmonth']}");
+	
+	<!--{if $jsondata['monitorwebsite']['isserverexpired']}-->
+	var currentSiteMonitorState = false;
+	<!--{else}-->
+	var currentSiteMonitorState = true;
+	<!--{/if}-->
+	
+	<!--{if $jsondata['preferenceinfo']['isseopreference']}-->
+	var isSEOPreference = true;
+	<!--{else}-->
+	var isSEOPreference = false;
+	<!--{/if}-->
+	
+    var selPackagePrice = parseInt("{$jsondata['monitorwebsite']['price']}");
+    var PreferenceMonth = {$jsondata['preferenceinfo']['preferencemonth']};
+    var PreferenceLimitMonth = {$jsondata['preferenceinfo']['limitmonth']};
+    var SpreeAmount = {$jsondata['redpacketinfo']['spreeamount']};
+        function getServiceExpiredDateAndPayMoney(isUseVoucher, spreeamount,useRedPacket) {
+        if (!currentSiteMonitorState) {
+            getExpiredDate(null, selOpenMonth, isUseVoucher, isSEOPreference, PreferenceLimitMonth, PreferenceMonth, useRedPacket);
+        }
+        else {
+            getExpiredDate("{$jsondata['monitorwebsite']['expiredtime']}", selOpenMonth, isUseVoucher, isSEOPreference, PreferenceLimitMonth, PreferenceMonth, useRedPacket);
+        }
+        jq("#paymoney").html(parseFloat(selPackagePrice) * parseFloat(selOpenMonth));
+        jq("#realpaymoney").html(parseFloat(selPackagePrice) * parseFloat(selOpenMonth) - spreeamount);
+		jq('#realpaymoney_val').val(jq("#realpaymoney").html());
+    }
+
+    getServiceExpiredDateAndPayMoney(false, 0);
+    //初始化开通月份单击事件
+    var openMonths = document.getElementsByName("open_month");
+    for (j = 0; j < openMonths.length; j++) {
+        openMonths[j].onclick = function () {
+            selOpenMonth = parseInt(this.value);
+            if (selOpenMonth == 12 && {$jsondata['redpacketinfo']['isshowredpacket']} == 1) {
+                if (selPackageID >= 3) {
+                    jq("#div_realpaymoney").show();
+                    if (jq("#redpacket").length == 0) {
+                        jq("#div_paymoney").find("div.enter").after('<div id="redpacket"><input type="checkbox" id="useredpacket" name="useredpacket" checked value="1"/><label for="useredpacket">\u4f7f\u7528' + SpreeAmount + '\u5143\u7ea2\u5305\u62b5\u7528</label></div>');
+                    }
+                    jq("#useredpacket_ret").val(1);
+                    redpacketClick();
+                    getServiceExpiredDateAndPayMoney(false, SpreeAmount, true);
+                }
+                else {
+                    jq("#useredpacket_ret").val(0);
+                    jq("#div_realpaymoney").hide();
+                    if (jq("#redpacket").length > 0) {
+                        jq("#redpacket").remove();
+                    }
+                    getServiceExpiredDateAndPayMoney(false, 0, true);
+                }
+            }
+            else {
+                jq("#div_realpaymoney").hide();
+                jq("#useredpacket_ret").val(0);
+                if (jq("#redpacket").length > 0) {
+                    jq("#redpacket").remove();
+                }
+                getServiceExpiredDateAndPayMoney(false, 0, false);
+            }
+        }
+    }
+    initPayment("{$jsondata['user']['money']}");
+    function redpacketClick() {
+        jq("#redpacket").find("input[type='checkbox']").change(function () {
+            if (jq(this).is(":checked")) {
+                jq("#useredpacket_ret").val(1);
+                getServiceExpiredDateAndPayMoney(false, SpreeAmount,true);
+            }
+            else {
+                jq("#useredpacket_ret").val(0);
+                getServiceExpiredDateAndPayMoney(false, 0);
+            }
+        });
+    }
+    //检查使用抵用券开通
+    function checkIsSelectUseVoucherOpen() {
+        if (jq("#usevoucheropen").is(":checked")) {
+            jq("#vouchers").css('display', "inline");
+            jq("#vouchers").val("");
+        }
+        else {
+            jq("#vouchers").hide();
+            jq("#div_paymoney").show();
+            jq("#div_pay_payment").show();
+            for (i = 0; i < openMonths.length; i++) {
+                openMonths[i].disabled = false;
+            }
+            getServiceExpiredDateAndPayMoney(false, 0);
+        }
+    }
+
+    //选中抵用券开通
+    function changeVoucher(target) {
+        if (target.value != "") {
+            var arrayVal = new Array();
+            arrayVal = target.value.toString().split(',');
+            for (i = 0; i < openMonths.length; i++) {
+                if (openMonths[i].value == arrayVal[1].toString()) {
+                    openMonths[i].disabled = true;
+                    openMonths[i].checked = true;
+                }
+                else {
+                    openMonths[i].disabled = true;
+                    openMonths[i].checked = false;
+                }
+            }
+
+            jq("#div_paymoney").hide();
+            jq("#div_pay_payment").hide();
+            selOpenMonth = parseInt(arrayVal[1].toString());
+            getServiceExpiredDateAndPayMoney(true, 0);
+        }
+        else {
+            for (i = 0; i < openMonths.length; i++) {
+                if (i == 0) {
+                    openMonths[i].checked = true;
+                    selOpenMonth = parseInt(openMonths[i].value);
+                }
+                openMonths[i].disabled = false;
+            }
+            jq("#div_paymoney").show();
+            jq("#div_pay_payment").show();
+            getServiceExpiredDateAndPayMoney(false, 0);
+        }
+        if (jq("#redpacket").length > 0) {
+            jq("#redpacket").remove();
+        }
+    }
+			jq(function(){
+				var p = art.dialog.open.api;
+				jq(document).change(function(){
+					var t = window.setTimeout(function(){
+						p.size(420, 200);
+						p.size(420, jq(document).height());
+					}, 50);
+					
+				});
+			});	
+</script>
+		  	
+</body>
+
+</html>		

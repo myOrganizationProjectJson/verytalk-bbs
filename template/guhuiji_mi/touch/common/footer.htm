@@ -1,0 +1,43 @@
+<!--{hook/global_footer_mobile}-->
+<!--{eval $useragent = strtolower($_SERVER['HTTP_USER_AGENT']);$clienturl = ''}-->
+<!--{if strpos($useragent, 'iphone') !== false || strpos($useragent, 'ios') !== false}-->
+<!--{eval $clienturl = $_G['cache']['mobileoem_data']['iframeUrl'] ? $_G['cache']['mobileoem_data']['iframeUrl'].'&platform=ios' : 'http://www.discuz.net/mobile.php?platform=ios';}-->
+<!--{elseif strpos($useragent, 'android') !== false}-->
+<!--{eval $clienturl = $_G['cache']['mobileoem_data']['iframeUrl'] ? $_G['cache']['mobileoem_data']['iframeUrl'].'&platform=android' : 'http://www.discuz.net/mobile.php?platform=android';}-->
+<!--{elseif strpos($useragent, 'windows phone') !== false}-->
+<!--{eval $clienturl = $_G['cache']['mobileoem_data']['iframeUrl'] ? $_G['cache']['mobileoem_data']['iframeUrl'].'&platform=windowsphone' : 'http://www.discuz.net/mobile.php?platform=windowsphone';}-->
+<!--{/if}-->
+
+<div id="mask" style="display:none;"></div>
+<!--自定义开始-->
+
+<div class="footer">
+  <footer>
+    <div class="banben"> <a href="{$_G['setting']['mobile']['simpletypeurl'][0]}">{lang no_simplemobiletype}</a> <a class="a" href="javascript:;">{lang mobile2version}</a> <a href="{$_G['setting']['mobile']['nomobileurl']}">{lang nomobiletype}</a> 
+    </div>
+    <p> 骨灰级wap前端设计（<a href="http://m.guhuiji.cn">m.guhuiji.cn</a>） </p>
+  </footer>
+</div>
+</div>
+<div class="nav_left">
+  <div class="home"><a href="<!--{if $_G[uid]}-->home.php?mod=space&uid=$_G[uid]&do=profile&mycenter=1<!--{else}-->member.php?mod=logging&action=login<!--{/if}-->"><img src="<!--{if $_G[uid]}-->{avatar($space[uid], small, true)}<!--{else}-->template/guhuiji_mi/touch/guhuiji/img/home.png<!--{/if}-->" alt="个人中心"> </a></div>
+  <div class="home_login"><a href="<!--{if $_G[uid]}-->home.php?mod=space&uid=$_G[uid]&do=profile&mycenter=1<!--{else}-->member.php?mod=logging&action=login<!--{/if}-->"><!--{if $_G[uid]}-->$_G[username]<!--{else}-->登录<!--{/if}--></a></div>
+  <nav>
+    <ul>
+      <li> <a href="forum.php?mod=guide&view=hot&mobile=2">网站首页</a> </li>
+      <li> <a href="forum.php?forumlist=1">论坛BBS</a> </li>
+      <li> <a href="search.php?mod=forum">搜索帖子</a> </li>
+      <li> <a href="#">网站公告</a> </li>
+    </ul>
+  </nav>
+</div>
+<script src="template/guhuiji_mi/touch/guhuiji/js/base.js?{VERHASH}"></script> 
+
+<!--自定义结束-->
+
+</body></html><!--{eval updatesession();}-->
+<!--{if defined('IN_MOBILE')}-->
+<!--{eval output();}-->
+<!--{else}-->
+<!--{eval output_preview();}-->
+<!--{/if}-->

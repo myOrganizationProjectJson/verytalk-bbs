@@ -1,0 +1,62 @@
+  <!--{template common/header}-->
+    <link rel="stylesheet" href="source/plugin/sanseqiu/css/sanseqiu.css">
+    <link rel="stylesheet" href="source/plugin/sanseqiu/js/jquery-ui-1.11.0.custom/jquery-ui.css">
+    <script src="source/plugin/sanseqiu/js/jquery-ui-1.11.0.custom/external/jquery/jquery.js"></script>
+    <script src="source/plugin/sanseqiu/js/jquery-ui-1.11.0.custom/jquery-ui.js"></script>
+    <script src="source/plugin/sanseqiu/js/caipiao.js"></script>
+	<script>
+	 jQuery(function(){  
+	 						 
+	 						 jQuery(".userStrB").each(function(index,obj){
+							 		var nums=jQuery(obj).text().split(",");
+							 		jQuery(obj).html("<i class='showBoll'>"+nums[0]+"</i>"+"<i class='showBoll'>"+nums[1]+"</i>"+"<i class='showBoll'>"+nums[2]+"</i>");
+							 	});
+	   		 });
+     </script>
+
+<div style="width:960px; margin:10px auto; height:200px;  "><img src="source/plugin/sanseqiu/css/ssq01.jpg" width="960" height="199"/> </div>
+<div style="width:960px; margin:0 auto;  "  class="shadowM">
+
+<div style="width:940px;  margin:5px auto; padding:10px;" id="caipiao_list">
+<!--{if !empty($nowQiShu)}-->
+   <h1 style="text-align:center; color:red; font-size:20px; padding:10px; background:#e3e3e3;">{lang sanseqiu:listzhongjiangshu}     <b> {lang sanseqiu:shangqiPub} </b>
+<div class="userStrB" style=" float:right;">{$nowQiShu[pubstr]}</div> </h1>
+ <ul style="display:block;">
+ 	
+ 	{loop $arrList $key $val} 
+ 	<li  style='border-bottom:1px solid #333; '>
+    
+  	<div style="float:left; height:100%">{lang sanseqiu:listzhongjiangshu2}</div>
+    <div class="userStrB">{$val['userstr']}</div>
+     <div>{lang sanseqiu:listzhongjiangshu3}</div>
+    
+    </li>
+    {/loop}
+ </ul>
+ 	<br/>
+ 	{eval echo multi($totalNum,10,$page, 'plugin.php?id=sanseqiu:sanseqiu&formhash='.FORMHASH.'&act=list&qiShu='.$qiShu);}
+ <div>
+ 	<div style="width:100%; ">
+	<form method="post" action="plugin.php?id=sanseqiu:sanseqiu&act=list&formhash={FORMHASH}"  > 
+	     {lang sanseqiu:di} <input type="text" name="qiShu" value="{$qiShu}" id="qiShu"  size="3" />{lang sanseqiu:qi} 
+          <input type="submit" value="{lang sanseqiu:chaxunshuruqishu}" style=""  /> {lang sanseqiu:maxQiShuL}{$maxQiShu}
+	</form>
+    </div>
+<!--{else}-->
+    <div style="width:940px; height:200px;"><div style="margin:50px auto; font:18px red ; text-align:center;">{lang sanseqiu:shangweiFaBu}</div></div>
+<!--{/if}-->
+    	<div class="clear"></div>
+        <div style="margin-bottom:20px; height:35px; width:95%;">
+   <a class="caiPiaoSubA" style="margin-left:10px; float:right;" href="plugin.php?id=sanseqiu:sanseqiu&act=listpub&formhash={FORMHASH}" >{lang sanseqiu:listPub}</a>  
+   <a class="caiPiaoSubA" style="float:right;" href="plugin.php?id=sanseqiu:sanseqiu" >{lang sanseqiu:fanhuiXZ}</a>
+    </div>
+     
+    </div>
+    
+
+    <div class="clear"></div>
+ </div>
+ <div class="clear"></div>
+</div>
+
+<!--{template common/footer}--> 

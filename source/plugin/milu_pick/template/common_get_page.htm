@@ -1,0 +1,118 @@
+<tbody id="show_get_page" {if  $info[url_range_type] == 1 || !$info[url_range_type]} {else}style="display:none"{/if}>
+<tr>
+  <th colspan="15" class="partition">{lang milu_pick:list_get_notice}</th>
+</tr>
+
+<tr >
+  <td s="1" class="td27" colspan="2">{lang milu_pick:link_test}:<span class="vtop rowform"></span></td>
+</tr>
+<tr  class="noborder"><td class="vtop rowform">
+<input name="set[page_url_test]" type="text" class="longtxt" id="page_url_test" value="{$info['page_url_test']}"><span style="margin-left:10px; "><a  id="page_url_test_visit" style="{if !$info['page_url_test']}display:none{/if}" target="_blank" href="{$info['page_url_test']}" >{lang milu_pick:visit}</a></span></td>
+<td s="1" class="vtop tips2">{if $_REQUEST['pmod'] != 'system_rules'}{eval echo milu_lang('get_url_by_listpage_rand', array('n' => 'page_url_test'));}{/if}</td>
+</tr>
+<tr >
+  <td colspan="2" class="td27" s="1">{lang milu_pick:list_get_rules}:&nbsp;&nbsp;&nbsp;<a id="insert_string_link" style="<{ {if $info[page_get_type] != 2}>display:none<{/if}>" href="javascript:void(0)"  onclick="insertAtCursor('page_link_rules','[link]')">{lang milu_pick:insert_link}</a>&nbsp;&nbsp;&nbsp; </td>
+</tr>
+<tr  class="noborder"><td class="vtop rowform">
+<ul onMouseOver="altStyle(this);">
+  <li id="li_page_get_type_1" {if $info[page_get_type] == 1 || !$info[page_get_type]} class="checked" {/if}><input  id="page_get_type_1" name="set[page_get_type]" type="radio" class="page_get_type_dom" onclick="show_hide('page_link_rules_1+page_link_dom','page_link_rules_2+insert_string_link',1);" value="1"  {if $info[page_get_type] == 1  ||!$info[page_get_type]} checked="checked" {/if}>
+  {lang milu_pick:dom_get}  </li>
+  <li  id="li_page_get_type_2" {if $info[page_get_type] == 2} class="checked" {/if} ><input id="page_get_type_2"  name="set[page_get_type]" type="radio" class="page_get_type_dom"  value="2"  onclick="show_hide('page_link_rules_1','page_link_rules_2+insert_string_link+page_link_dom',2);"  {if $info[page_get_type] == 2}checked="CHECKED" {/if}>
+    {lang milu_pick:str_get}</li>
+        
+	 <li  id="li_page_get_type_3" {if $info[page_get_type] == 3 } class="checked" {/if} ><input id="page_get_type_3"  name="set[page_get_type]" type="radio" class="page_get_type_dom"  value="3"  onclick="show_hide('page_link_rules_1+page_link_rules_2+page_link_dom','page_link_rules_2+insert_string_link+',2);"  {if $info[page_get_type] == 3}checked="CHECKED" {/if}>
+    {lang milu_pick:evo_get}</li>
+	
+
+	
+</ul></td>
+<td s="1" class="vtop tips2"></td>
+</tr>
+<tr id="page_link_dom"  {if $info['page_get_type'] == 3}style="display:none"{/if} class="noborder"  ><td class="vtop rowform"><textarea rows="6" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" name="set[page_link_rules]" id="page_link_rules" cols="50" class="tarea w_area">{$info['page_link_rules']}</textarea></td>
+<td class="vtop tips2" s="1"><p id="page_link_rules_1" style="{if $info[page_get_type] != 1 && $info[page_get_type]}display:none{/if}">{lang milu_pick:dom_page_get_notice}</p>
+  <p id="page_link_rules_2" style=" {if $info[page_get_type] != 2}display:none{/if}">{lang milu_pick:misc_notice}<br>{lang milu_pick:insert_link_notice}[link]</p>
+  <p id="page_link_rules_4" style=" {if $info[page_get_type] != 4}display:none{/if}">{lang milu_pick:json_get_notice}<br></p>
+  </td>
+</tr>
+
+<!--进一步处理网址-->
+<tbody id="is_format_page_link_show" >
+<tr >
+  <td colspan="2" class="td27" s="1">{lang milu_pick:is_format_page_link}:</td>
+</tr>
+<tr class="noborder" >
+  <td class="vtop rowform">
+  <ul onMouseOver="altStyle(this);"><li {if $info[is_fiter_page_link] == 1} class="checked" {/if}><input onclick="show_hide('page_link_fiter_replace','',1);" name="set[is_fiter_page_link]" type="radio" class="is_fiter_page_link" value="1"  {if $info[is_fiter_page_link] == 1} checked="checked" {/if}>
+&nbsp;{lang milu_pick:yes}</li>
+    <li {if $info[is_fiter_page_link] != 1} class="checked" {/if}><input onclick="show_hide('page_link_fiter_replace','',2);" name="set[is_fiter_page_link]" type="radio" class="is_fiter_page_link" value="2" {if $info[is_fiter_page_link] != 1} checked="checked" {/if}>
+    {lang milu_pick:no}    </li>
+</ul></td>
+  <td class="vtop tips2" s="1">&nbsp;</td>
+</tr>
+</tbody>
+
+<tbody id="page_link_fiter_replace" {if $info['is_fiter_page_link'] != 1}style="display:none"{/if}>
+<tr >
+  <td colspan="2" class="td27" s="1">{lang milu_pick:page_link_replace}:<a href="javascript:void(0)" onclick="insertAtCursor('page_link_replace_rules','(*)')">{lang milu_pick:insert_var_place}(*)</a></td>
+</tr>
+<tr class="noborder" ><td class="vtop rowform">
+<textarea rows="6" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" name="set[page_link_replace_rules]" id="page_link_replace_rules" cols="50" class="tarea w_area" '..'="">{$info['page_link_replace_rules']}</textarea></td>
+<td class="vtop tips2" s="1"><p>{lang milu_pick:page_link_replace_notice}</p>  </td></tr>
+
+<tr >
+  <td colspan="2" class="td27" s="1">{lang milu_pick:url_contain_notice}:&nbsp;&nbsp;&nbsp;<a  href="javascript:void(0)"  onclick="insertAtCursor('page_url_contain','(*)')">{lang milu_pick:fast_insert}</a>&nbsp;&nbsp;&nbsp;</td>
+</tr>
+
+<tr class="noborder" ><td class="vtop rowform">
+<textarea rows="6" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" name="set[page_url_contain]" id="page_url_contain" cols="50" class="tarea" >{$info['page_url_contain']}</textarea></td>
+<td class="vtop tips2" s="1">{lang milu_pick:row_insert_something}(*)</td>
+</tr>
+
+<tr >
+  <td colspan="2" class="td27" s="1">{lang milu_pick:url_no_notice}:&nbsp;&nbsp;&nbsp;<a   href="javascript:void(0)"  onclick="insertAtCursor('page_url_no_contain','(*)')">{lang milu_pick:fast_insert}</a>&nbsp;&nbsp;&nbsp;</td>
+</tr>
+
+<tr class="noborder" ><td class="vtop rowform">
+<textarea rows="6" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" name="set[page_url_no_contain]" id="page_url_no_contain" cols="50" class="tarea" >{$info['page_url_no_contain']}</textarea></td>
+<td class="vtop tips2" s="1">{lang milu_pick:row_insert_something}</td>
+</tr>
+
+<tr >
+  <td colspan="2" class="td27" s="1">{lang milu_pick:content_no_contain}:&nbsp;&nbsp;&nbsp;<a   href="javascript:void(0)"  onclick="insertAtCursor('content_no_contain','(*)')">{lang milu_pick:fast_insert}</a>&nbsp;&nbsp;&nbsp;</td>
+</tr>
+
+<tr class="noborder" ><td class="vtop rowform">
+<textarea rows="6" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" name="set[content_no_contain]" id="content_no_contain" cols="50" class="tarea" >{$info['content_no_contain']}</textarea></td>
+<td class="vtop tips2" s="1">{lang milu_pick:row_insert_something}</td>
+</tr>
+
+</tbody>
+
+<!--进一步处理网址end-->
+
+<tbody id="get_page_link_test" {if ($info['url_range_type'] && $info[url_range_type] != 1)} style="display:none" {/if}>
+<tr >
+  <td colspan="2" class="td27" s="1"><a onclick="get_page_link();" href="javascript:void(0);">{lang milu_pick:hit_view_result}</a></td>
+</tr>
+</tbody>
+
+
+<!--从列表采集封面-->
+
+<tbody id="show_get_page2" {if $info[url_range_type] != 1} style="display:none" {/if}>
+
+{eval echo pickOutput::show_title(milu_lang('is_pick_cover_title'));}
+
+{eval echo pickOutput::show_tr(array('name' => milu_lang('is_pick_cover_from_listpage'),'desc' => milu_lang('is_pick_cover_from_listpage_notice'), 'arr' => array('name' => 'is_pick_cover_from_listpage', 'int_val' => 2, 'info' => $info, 'js' => array(0 => 'show_hide(\'pick_cover_rules_show\',\'\',1)', 1 => 'show_hide(\'pick_cover_rules_show\',\'\', 2)') )), 'radio');}
+
+<tbody id="pick_cover_rules_show" {if $info[is_pick_cover_from_listpage] != 1} style="display:none" {/if}>
+{eval echo pickOutput::rules_get_output(array('test_func' => 'rules_get_test', 'name' => 'pick_cover_rules', 'title' => milu_lang('pick_cover_rules'), 'textarea_desc' => milu_lang('get_cover_notice').'@@@'.milu_lang('misc_notice')), $info);}
+</tbody>
+</tbody>
+<!--从列表采集封面end-->
+
+
+
+<tr height="1" class="noborder"><td class="vtop rowform"></td>
+<td s="1" class="vtop tips2" style="width:100%"></td>
+</tr>

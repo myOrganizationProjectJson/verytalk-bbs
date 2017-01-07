@@ -1,0 +1,49 @@
+body,td,.p1,.p2,.formfont,r1{font-family:arial}
+td,table{font-size:12px;font-family:Arial;color:#000000; line-height:18px;}
+A:link, A:visited, A:active {
+	COLOR: {#000020;};
+}
+A:hover {
+	COLOR: {#FF4400;};
+}
+.p14{font-size:14px}
+.pad10L {PADDING-LEFT: 10px; }
+.tdLine24{height:23px; border-top:1px solid #e4e4e4;}
+.dBlue{ background-color:#CDEAF6;clear:both ; height:60px; border:0; width:100%; margin:0; padding:0}
+.dbBor{ border:1px solid #5BC8F0;}
+.BlueBG{ background-color:#DDEDF4;}
+.BlueBG td{height:16px;line-height:16px;}
+.topLine{border-top:1px solid #5CABCB}
+.gray12{color:#999999;}
+.f10 {FONT-SIZE:9.5pt;margin-left:10px}
+.r1 {font-size:10.5pt;table-layout:fixed; word-break :break-all}
+.r11 {font-size:10.5pt;table-layout:fixed; word-break :break-all}
+.t{border-bottom:1px solid #e1e1e1; height:28px; padding-left:6px;}
+.d{font-size:14px;border-bottom:1px solid #e1e1e1; height:28px; padding-left:6px;table-layout:fixed; word-break :break-all}
+.grayTB{background-color:#FFF9E1;}
+.pb{font-weight:bold;}
+.lh24 { LINE-HEIGHT: 24px}
+.sbjt{font-size: 14px;color: #000000;line-height: 18px; padding-left:5px;}
+.formfont {	FONT-SIZE: 16px; FONT-FAMILY:Arial}
+.unnamed3 {border: 1px solid #5bc8f0;}
+.unnamed2 {margin-top: 5px;margin-bottom: 10px;}
+.pad5{padding:3px;}
+.unnamed5 {border: 1px solid #E9E28C;}
+.yLineTips {BORDER-TOP: #75ddab 1px solid; BORDER-left: #e6f9ec 1px solid; BORDER-right: #e6f9ec 1px solid; BORDER-bottom: #e6f9ec 1px solid; FONT-SIZE: 14px; COLOR: #333333; HEIGHT: 24px; BACKGROUND-COLOR: #e6f9ec}
+.p3 {FONT-SIZE: 13px; LINE-HEIGHT: 24px}
+.b{width:48px;height:7px; background-color:#e9e9e9 }
+.style1 {FONT-WEIGHT: bold; font-size: 14; }
+.style2 {color: #FF0000}
+.bi {background-color:#CDEAF6;height:20px;margin-bottom:12px}
+.i{font-size:16px;font-family:arial;}
+.Tit{height:21px; font-size:14px;font-family:arial;}
+.fB{ font-weight:bold;}
+.htb{margin-bottom:5px;}
+#ft{clear:both;line-height:20px;text-align:center}
+.pg{font-size:14px;word-spacing:4px;font-family:arial;text-align:center;height:30px;line-height:30px;}
+.pg *{font-family:arial}
+.pg font{font-size:16px;}
+.list td{border-bottom:1px solid #e1e1e1; height:25px; padding-left:6px;}
+.list td.d{font-size:14px;border-bottom:1px solid #e1e1e1; height:25px; padding-left:6px;table-layout:fixed; word-break :break-all}
+a img {border: none; }
+.buttonV2,a.buttonV2:link,a.buttonV2:visited,a.buttonV2:hover,a.buttonV2:active {border:1px solid #999;color:#999;font-size:x-small;font-weight:bolder;margin:0;padding-left:.75em;padding-right:.75em;text-decoration:none;text-transform:capitalize;background:white}

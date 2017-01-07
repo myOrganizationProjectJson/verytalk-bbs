@@ -1,0 +1,2 @@
+<?php die('Permission denied');?>
+a:1:{s:87:"http://www.56php.com/plugin.php?id=pick_user:api&myac=get_userbak_status&tpl=no&domain=";a:3:{s:4:"data";a:2:{s:7:"content";s:136:"eyJjYXRlZ29yeV9jb3VudCI6IjAiLCJwaWNrZXJfY291bnQiOiIwIiwiZmFzdF9jb3VudCI6IjAiLCJzeXN0ZW1fY291bnQiOiIwIiwidXBkYXRlX2RhdGVsaW5lIjpudWxsfQ==";s:6:"cookie";b:0;}s:7:"timeout";i:1421389901;s:3:"ttl";i:2592000;}}

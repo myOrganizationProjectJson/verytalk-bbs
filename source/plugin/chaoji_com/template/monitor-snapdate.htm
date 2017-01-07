@@ -1,0 +1,50 @@
+
+
+<table class="tb tb2 borB"><colgroup><col style="width:100px;">
+                        <col>
+                        <col>
+                        </colgroup>
+						<thead>
+	<tr class="partition">
+		<th>{lang chaoji_com:report8_1}</th>
+		<th class="tc">{lang chaoji_com:baidu_kuaizhao}</th>
+		<th class="tc">{lang chaoji_com:indexposition}</th>
+	</tr></thead>
+	<tbody id="list-1">
+		{lang chaoji_com:loading1}
+	</tbody>
+	{subtemplate chaoji_com:searchdaywrap}
+</table>
+<script type="text/javascript">
+jq(function(){
+	jq.getJSON('{CJ_MONITOR_SNAPDATE_URL}&formhash={FORMHASH}&begindate={$st}&enddate={$et}', function(json){
+		if(json.code != 0){
+		}else{
+			var data = json.data;
+				if(data.issearchday){
+					jq('#searchday').html(data.typeinfo.historydays);
+					jq('#searchdaywrap').show();
+				}
+				if(!data.typeinfo.isexport){
+					jq('#exportlink').hide();
+				}			
+			var str = '';
+			for(var i=0; i< data.createdates.length; i++){
+				var trstyle = '';
+					if(i % 2 == 0){
+						trstyle = 'none';
+					}else{
+						trstyle = '#FBFAF8';
+					}
+				str += '<tr class="hover"  style="background-color:' + trstyle + ';">\
+				<td>' + chaoji_formatdate(data.createdates[i]) + '</td>\
+				<td class="tc">' + chaoji_render_data(data.createdates[i], data.currentdate, data.datalist[0].datas[i], 'http://www.baidu.com/s?wd=' + chaojiapp_getcookie('chaojiapp_domain')) + '</td>\
+				<td class="tc">' + chaoji_render_data(data.createdates[i], data.currentdate, data.datalist[1].datas[i], 'http://www.baidu.com/s?wd=site:' + chaojiapp_getcookie('chaojiapp_domain')) + '</td>\
+			</tr>';
+			}
+			jq('#list-1').html(str);
+		}
+	});
+});
+</script>
+						

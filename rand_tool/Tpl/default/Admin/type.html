@@ -1,0 +1,14 @@
+ <html>
+ <div>
+     <span>新增随机文章</span></br></br>
+	 <form action="{:U('admin/addtype')}" method="post">
+              <span style="margin:0 30">新增分类</span> 
+                    <input type="text" name="type"></br></br>
+					<span style="margin:0 29; color:red" >所有分类：</span> </br></br>
+					<volist name="SubjectType" id="vo">
+					<span style="margin:0 29">{$vo.rename}</span> </br>
+                    </volist>
+		 <input type="submit" value="确认"/>
+	 </form>
+ </div>
+ </html>

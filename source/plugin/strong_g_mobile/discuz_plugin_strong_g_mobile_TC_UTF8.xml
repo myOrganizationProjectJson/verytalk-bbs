@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[X3,X3.1,X3.2]]></item>
+	<item id="Time"><![CDATA[2014-11-19 07:28]]></item>
+	<item id="From"><![CDATA[Discuz! Board (http://localhost/dz32gbk/)]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[1]]></item>
+			<item id="adminid"><![CDATA[1]]></item>
+			<item id="name"><![CDATA[strong_g手機設置中心]]></item>
+			<item id="identifier"><![CDATA[strong_g_mobile]]></item>
+			<item id="description"><![CDATA[]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[strong_g_mobile/]]></item>
+			<item id="copyright"><![CDATA[QQ695023684]]></item>
+			<item id="modules"><![CDATA[a:0:{}]]></item>
+			<item id="version"><![CDATA[v1.2]]></item>
+		</item>
+		<item id="version"><![CDATA[X3,X3.1,X3.2]]></item>
+		<item id="var">
+			<item id="0">
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="title"><![CDATA[默認首頁]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[homeset]]></item>
+				<item id="type"><![CDATA[select]]></item>
+				<item id="value"><![CDATA[1]]></item>
+				<item id="extra"><![CDATA[1=門戶
+2=論壇
+3=指定板塊
+4=熱帖]]></item>
+			</item>
+			<item id="1">
+				<item id="displayorder"><![CDATA[1]]></item>
+				<item id="title"><![CDATA[指定首頁板塊]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[homeid]]></item>
+				<item id="type"><![CDATA[forum]]></item>
+				<item id="value"><![CDATA[2]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="2">
+				<item id="displayorder"><![CDATA[2]]></item>
+				<item id="title"><![CDATA[導航欄背景色]]></item>
+				<item id="description"><![CDATA[導航欄背景顏色 ，如#FC5218]]></item>
+				<item id="variable"><![CDATA[dh_bg_color]]></item>
+				<item id="type"><![CDATA[color]]></item>
+				<item id="value"><![CDATA[#27BAFF]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="3">
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="title"><![CDATA[側邊欄背景左]]></item>
+				<item id="description"><![CDATA[由于側邊欄的背景是由左到右漸變的，請與下個設置項結合使用]]></item>
+				<item id="variable"><![CDATA[cbl_bg_l]]></item>
+				<item id="type"><![CDATA[color]]></item>
+				<item id="value"><![CDATA[#272B3A]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="4">
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="title"><![CDATA[側邊欄背景右]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[cbl_bg_r]]></item>
+				<item id="type"><![CDATA[color]]></item>
+				<item id="value"><![CDATA[#493421]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="5">
+				<item id="displayorder"><![CDATA[30]]></item>
+				<item id="title"><![CDATA[標題+描述列表模式]]></item>
+				<item id="description"><![CDATA[請填入開啟此模式板塊id,多板塊以英文逗號分隔,如1,2,3,4,5]]></item>
+				<item id="variable"><![CDATA[titledescribe]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="6">
+				<item id="displayorder"><![CDATA[40]]></item>
+				<item id="title"><![CDATA[標題+圖片列表模式]]></item>
+				<item id="description"><![CDATA[請填入開啟此模式板塊id,多板塊以英文逗號分隔,如1,2,3,4,5]]></item>
+				<item id="variable"><![CDATA[titlepic]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="7">
+				<item id="displayorder"><![CDATA[50]]></item>
+				<item id="title"><![CDATA[標題+描述+圖片模式]]></item>
+				<item id="description"><![CDATA[請填入開啟此模式板塊id,多板塊以英文逗號分隔,如1,2,3,4,5]]></item>
+				<item id="variable"><![CDATA[titledescribepic]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[2,63,62]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="8">
+				<item id="displayorder"><![CDATA[60]]></item>
+				<item id="title"><![CDATA[描述顯示字符長度]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[titledescribelen]]></item>
+				<item id="type"><![CDATA[number]]></item>
+				<item id="value"><![CDATA[80]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="9">
+				<item id="displayorder"><![CDATA[70]]></item>
+				<item id="title"><![CDATA[開啟瀑布流的板塊]]></item>
+				<item id="description"><![CDATA[請填入開啟此模式板塊id,多板塊以英文逗號分隔,如1,2,3,4,5]]></item>
+				<item id="variable"><![CDATA[pic]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="10">
+				<item id="displayorder"><![CDATA[80]]></item>
+				<item id="title"><![CDATA[只顯示有圖片附件的]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[truepic]]></item>
+				<item id="type"><![CDATA[radio]]></item>
+				<item id="value"><![CDATA[1]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="11">
+				<item id="displayorder"><![CDATA[90]]></item>
+				<item id="title"><![CDATA[左側邊欄菜單設置]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[leftmenu]]></item>
+				<item id="type"><![CDATA[textarea]]></item>
+				<item id="value"><![CDATA[	<li><a href="forum.php"><img src="./template/strong_g/touch/images/s_home.png"/>首頁</a></li>
+			<li><a href="forum.php?forumlist=1"><img src="./template/strong_g/touch/images/s_forum.png"/>論壇</a></li>
+			<li><a href="portal.php?mod=list&catid=1"><img src="./template/strong_g/touch/images/s_news.png"/>新聞</a></li>
+			<li><a href="forum.php?mod=forumdisplay&fid=38&mobile=2"><img src="./template/strong_g/touch/images/s_pic.png"/>瀑布流</a></li>
+			<li><a href="group.php"><img src="./template/strong_g/touch/images/s_group.png"/>群組</a></li>
+			<li><a href="forum.php?mod=forumdisplay&fid=50&mobile=2"><img src="./template/strong_g/touch/images/s_classify.png"/>分類信息</a></li>
+			
+			<li><a href="forum.php?mobile=no"><img src="./template/strong_g/touch/images/s_pc.png"/>電腦板</a></li>]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="12">
+				<item id="displayorder"><![CDATA[100]]></item>
+				<item id="title"><![CDATA[底部導航設置]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[bottomnav]]></item>
+				<item id="type"><![CDATA[textarea]]></item>
+				<item id="value"><![CDATA[			<a href="#" onclick="do_left()"><img src="./template/strong_g/touch/images/ss_menu.png"/></a>
+			<a href="forum.php"><img src="./template/strong_g/touch/images/ss_home.png"/></a>
+			<a href="forum.php?forumlist=1"><img src="./template/strong_g/touch/images/ss_forum.png"/></a>
+			<a href="search.php?mod=forum"><img src="./template/strong_g/touch/images/ss_soso.png"/></a>
+			<a href="#" onclick="do_right()"><img src="./template/strong_g/touch/images/ss_user.png"/></a>]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+		</item>
+	</item>
+</root>

@@ -1,0 +1,774 @@
+<script type="text/javascript" language="javascript" src="source/plugin/chaoji_com/resource/js/jquery.min.js"></script>
+<script src="source/plugin/chaoji_com/resource/js/artDialog/artDialog.js?skin=default"></script>
+<script src="source/plugin/chaoji_com/resource/js/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript">var jq = jQuery.noConflict();var disallowfloat = false;var clientinfo_status={$clientinfo_status};var clientinfo_str='{$clientinfo_str}';var PLUGIN_URL = '{CJ_PLUGIN_URL}'; var FORMHASH = '{FORMHASH}';</script>
+<script type="text/javascript" src="source/plugin/chaoji_com/resource/js/highcharts.js" language="javascript"></script>
+<script type="text/javascript" src="source/plugin/chaoji_com/resource/js/tableorder.js" language="javascript"></script>
+<script src="source/plugin/chaoji_com/resource/js/template-native.js" type="text/javascript"></script>
+<link href="source/plugin/chaoji_com/resource/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" language="javascript" src="source/plugin/chaoji_com/resource/js/script.js?{TIMESTAMP}"></script>
+
+<table class="tb tb2">
+<tbody>
+		<tr>
+			<th colspan="15" class="partition" style="text-align:left;">{lang chaoji_com:overview}</th>
+		</tr>
+<tr class="borTn"><td width="250">
+<div class="siterank">
+                            <div class="frame">.</div>
+                            <div class="box">
+                                <div class="screenshot" style="display: none;">
+                                    
+                                </div>
+                                <div class="rank">
+                                    <div class="title">{lang chaoji_com:todayscore}<a id="link_href" href="{CJ_PLUGIN_URL}pmod=reports&op=monitor-todayreport" title="{lang chaoji_com:view_last_7day_score}"></a></div>
+                                    <div class="score score-no">{$todayscore} </div>
+                                    <div class="des">{$scorerate}</div>
+                                    <div class="rankdetail">
+                                        <span class="item">{$baiduscore}</span>
+                                        <span class="item">{$googlescore}</span>
+                                    </div>
+                                                                                                        </div>
+                            </div>
+                            
+                  
+                        </div>
+</td><td>
+<table class="tb tb2 seo-general-data" style="width:100%;">
+	<tbody class="borTn">
+
+
+		<tr>
+			<td colspan="15" style="border-top:0;">
+			 <strong>{lang chaoji_com:sitename}{lang chaoji_com:maohao}</strong> {$sitename} | <a href="http://{$domain}" class="blue" target="_blank">{$domain}</a>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="15">
+			 <strong>{lang chaoji_com:starttime}</strong> {$starttime}
+			</td>
+		</tr>	
+		<tr>
+			<td colspan="15">
+			 <strong>{lang chaoji_com:domainage}</strong> {$domainage}
+			</td>
+		</tr>
+		<tr>
+			<td colspan="15">
+			 <strong>{lang chaoji_com:domainexpire}</strong> {$domainexpire} [<a href="http://whois.chinaz.com/{$domainexpire1}" target="_blank">{lang chaoji_com:whois}</a>]
+			</td>
+		</tr>			
+		<tr>
+			<td colspan="15">
+			 <strong>{lang chaoji_com:baidurank1}{lang chaoji_com:maohao}</strong>&nbsp;<a href="http://www.chaoji.com/seo/baidusort.aspx?host={$domain}" class="blue" target="_blank">{$baidupr}</a>&nbsp;
+			 <strong>{lang chaoji_com:googlepr}{lang chaoji_com:maohao}</strong>&nbsp;<a href="http://pr.chinaz.com/?PRAddress={$domain}" class="blue" target="_blank">{$googlepr}</a>&nbsp;
+			 <strong>{lang chaoji_com:sogourank}{lang chaoji_com:maohao}</strong>&nbsp;<a href="http://pr.chinaz.com/?PRAddress={$domain}" target="_blank" class="blue">{$sogoupr}</a>&nbsp;
+			 <strong>{lang chaoji_com:alexarank}</strong>&nbsp;<a href="http://alexa.chinaz.com/?domain={$domain}" target="_blank" class="blue">{$alexarank}</a>&nbsp; {$alexaranktrend}
+			</td>
+		</tr>
+		<tr>
+			<td colspan="15">
+			<strong> {lang chaoji_com:planrank}</strong> {$packagename} 
+			<!--{if $typeid == '6'}-->
+			[<a href="#" onclick="open_dialog(this, '{CJ_PLUGIN_URL}pmod=setting&op=detail');return false;" class="blue" data-type="" data-title="{eval echo sprintf(chaojiapp_lang('detail-title'), $sitename);}">{lang chaoji_com:detail}</a>]
+			<!--{else}-->
+			[<a href="#" onclick="open_dialog(this, '{CJ_PLUGIN_URL}pmod=setting&op=upgrade');return false;" class="blue" data-type="" data-title="{lang chaoji_com:upgrade-title}">{lang chaoji_com:upgrade}</a>]
+			<!--{/if}-->
+			&nbsp;<strong>{lang chaoji_com:planexpire}</strong> {$expireddate} [<a href="#" onclick="open_dialog(this, '{CJ_PLUGIN_URL}pmod=setting&op=renewal');return false;" class="blue" data-type="" data-title="{lang chaoji_com:renew-title}">{lang chaoji_com:renew}</a>]
+			</td>
+		</tr>	
+	</tbody>
+</table>
+</td></tr></tbody></table>
+
+<table class="tb tb2 ">
+	<tbody>
+		<tr>
+			<th colspan="15" class="partition" style="text-align:left;">{lang chaoji_com:baidurala}<div style="float:right;"><a href="{CJ_PLUGIN_URL}pmod=reports&op=monitor-rank">{lang chaoji_com:more}>></a></div></th>
+		</tr>
+		<tr class="header">
+			<th>{lang chaoji_com:baidu_citiao}</th>
+			<th class="tc">{lang chaoji_com:baidu_liuliang}</th>
+			<th class="tc">{lang chaoji_com:baidu_kuaizhao}(<a href="{CJ_PLUGIN_URL}pmod=reports&op=monitor-snapdate">{lang chaoji_com:history}</a>)</th>
+			<th class="tc">{lang chaoji_com:indexposition}</th>
+			<th class="tc">{lang chaoji_com:baiduindexnum}</th>
+			<th class="tc">{lang chaoji_com:baidubacklink}</th>
+		</tr>
+		<tr class="bBox-B">
+			<td><a href="http://www.chaoji.com/seo/baidusort.aspx?host={$domain}" target="_blank">{$baidukeywords}</a></td>
+			<td class="tc"><a href="http://www.chaoji.com/seo/baidusort.aspx?host={$domain}" target="_blank">{$baiduflow}</a></td>
+			<td class="tc"><a href="http://www.baidu.com/s?wd={$domain}" target="_blank">{$baidusnap}</a></td>
+			<td class="tc"><a href="http://www.baidu.com/s?wd=site%3A{$domain}" target="_blank">{$homeposition}</a></td>
+			<td class="tc"><a href="http://www.baidu.com/s?wd=site%3A{$domain}" target="_blank">{$baidusiteindex}</a> {$baidusiteindextrend}</td>
+			<td class="tc"><a href="http://outlink.chinaz.com/?h={$domain}" target="_blank">{$outlinkcount}</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="tb tb2 ">
+	<tbody>
+		<tr>
+			<th colspan="15" class="partition" style="text-align:left;">{lang chaoji_com:all_overview}<div style="float:right;"><a href="{CJ_PLUGIN_URL}pmod=reports&op=monitor-site">{lang chaoji_com:more}>></a></div></th>
+		</tr>
+		<tr class="header">
+			<th width="100">{lang chaoji_com:search_engine}</th>
+			<th class="tc">{lang chaoji_com:baidu}</th>
+			<th class="tc">{lang chaoji_com:google}</th>
+			<th class="tc">{lang chaoji_com:qihu}</th>
+			<th class="tc">{lang chaoji_com:sogou}</th>
+		</tr>
+		<tr>
+			<td>{lang chaoji_com:archive_num}</td>
+			<td class="tc"><a href="http://www.baidu.com/s?wd=site%3A{$domain}" target="_blank">{$baidupages}</a> {$baidupagestrend}</td>
+			<td class="tc"><a href="http://www.google.com.hk/search?hl=zh-CN&q=site%3A{$domain}" target="_blank">{$googlepages}</a> {$googlepagestrend}</td>
+			<td class="tc"><a href="http://www.so.com/s?q=site%3A{$domain}" target="_blank">{$sopages}</a> {$sopagestrend}</td>
+			<td class="tc"><a href="http://www.sogou.com/web?query=site%3A{$domain}" target="_blank">{$sogoupages}</a> {$sogoupagestrend}</td>
+		</tr>
+		<tr class="bBox-B">
+			<td>{lang chaoji_com:backlink_num}</td>
+			<td class="tc"><a href="http://www.baidu.com/s?wd=domain%3A{$domain}" target="_blank">{$baidulink}</a> {$baidulinktrend}</td>
+			<td class="tc"><a href="http://www.google.com.hk/search?hl=zh-CN&q=link%3A{$domain}" target="_blank">{$googlelink}</a> {$googlelinktrend}</td>
+			<td class="tc"><a href="http://www.so.com/s?q=%22{$domain}%22" target="_blank">{$solink}</a> {$solinktrend}</td>
+			<td class="tc"><a href="http://www.sogou.com/web?query=%22{$domain}%22" target="_blank">{lang chaoji_com:search}</a></td>
+		</tr>		
+	</tbody>
+</table>
+
+
+<table class="tb tb2 ">
+	<tbody>
+		<tr>
+			<th colspan="15" class="partition" style="text-align:left;position:relative;line-height:30px;"><div style="float:left;">{lang chaoji_com:latest_24}</div> <div class="unknown_box">
+									<span class="unknown">?</span>
+									<span class="unknown_icon"></span>
+									<div class="unknown_main">
+										<p>{lang chaoji_com:unknown1}</p>
+									</div>	
+								</div>
+<div style="float:right;">{lang chaoji_com:latest_update}{$pageslastuptime}</div></th>
+		</tr>
+		<tr>
+			<td colspan="15">
+			 <div class="monitorchart chartwrap" id="containerWebsiteData"></div>
+			</td>
+		</tr>
+		
+	</tbody>
+</table>
+<script type="text/javascript" language="javascript">
+							 
+                             jq(function () {
+								 var chart;
+								 
+										var Data = {$websitehourlydata};
+										 jq('#containerWebsiteData').highcharts({
+											 chart: {
+												 height: 230,
+												 defaultSeriesType: 'spline'
+											 },
+											 Color: ['#4572A7'],
+											 credits: {
+												 enabled: false
+											 },
+											 title: {
+												 text: ''
+											 },
+											 xAxis: {
+												 categories: Data.categories,
+												 tickInterval: (Data.categories.length / 24 < 1) ? 1 : (parseInt(Data.categories.length / 24) * 2),
+												 labels: {
+													 style: {
+														 align: 'right',
+														 width: '80px',
+														 color: '#666',
+														 font: 'normal 12px {lang chaoji_com:songti}'
+													 },
+													 x: 10,
+													 y: 18
+												 }
+											 },
+											 yAxis: {
+												 min: Data.min,
+												 title: {
+													 text: ''
+												 },
+												 max: Data.max,
+												 tickInterval: Data.tickinterval,
+												 labels: {
+													 formatter: function () {
+														 return this.value;
+													 },
+													 style: { font: 'normal 12px {lang chaoji_com:songti}' }
+												 }
+
+											 }
+										   ,
+											 tooltip: {
+												 formatter: function () {
+													 var s = '{lang chaoji_com:update_time}(<span style="color:red;">' + Data.dates[this.points[0].point.x] + '</span>)';
+
+													 jq.each(this.points, function (i, point) {
+														 s += '<br/><span style="color:' + point.series.color + '">' + point.series.name + '</span>: ' + point.y;
+													 });
+													 return s;
+												 },
+												 shared: true,
+												 crosshairs: true
+											 },
+											 legend: {
+												 layout: 'horizontal',
+												 align: 'top',
+												 verticalAlign: 'top',
+												 y: 5,
+												 borderWidth: 1,
+												 itemWidth: 78,
+												 legendItemClick: legendItemClick
+											 },
+											 series: Data.data
+										 });
+										 chart = jq('#containerWebsiteData').highcharts();
+										 chart.series[1].hide();
+										 chart.series[2].hide();
+										 if (Data.nodata) {
+											 jq('#containerWebsiteData').append(" <div class='chart-empty'>{lang chaoji_com:nodata}</div>");
+										 }										
+                             });
+  
+                        </script>
+						
+<table class="tb tb2 ">
+	<tbody>
+		<tr><td class="borTnone" colspan="15" style="padding:0px!important;">						
+<div class="tabCaption clearfix" style="background:url(static/image/admincp/bg_repx_hc.gif) repeat-x 0 -40px;height:40px;line-height:40px;padding:0px;color:#09C;">
+                                <div class="tTabBox floatleft">
+                                    <ul class="clearfix">
+                                        <li class="current"><a href="javascript:void(0)" _id="#keyword_rank">{lang chaoji_com:keyword_rank}</a></li>
+                                        <li class="last" id="keyworddetaillast"><a href="javascript:void(0)" _id="#keyword_detail">{lang chaoji_com:keyword_detail}</a></li>
+										
+                                    </ul>
+                                </div><a href="{CJ_PLUGIN_URL}pmod=reports&op=monitor-keyword" class="blue" style="padding:0 8px;float:right; font-weight:bold;">{lang chaoji_com:more}>></a>
+                            </div>
+                            <div class="tTabMainBox" style="padding:0 10px;">
+                                <div id="keyword_rank">
+                                   <script type="text/javascript">
+								   function open_dialog1() {
+								   	var title = '';
+								   	var datatype = jq('#editkeywordtext').attr('data-type');
+								   	if (datatype == 'add') {
+								   		title = '{lang chaoji_com:add_keywords}';
+								   	} else {
+								   		title = '{lang chaoji_com:edit_keywords}';
+								   	}
+								   	art.dialog.open('{CJ_PLUGIN_URL}pmod=setting&op=edit_keywords&websiteid={$userwebsiteid}&datatype=' + datatype + '&returnmod=overview', {
+								   		title : title,
+								   		id : 'dialog1',
+								   		left : 320,
+										//width:460,
+								   		lock : true,
+								   		fixed : true
+								   	});
+								   }
+								   </script>
+									<table class="tb tb2 " style="margin-top:0px;" id="mos_hover">
+										<thead>
+											<tr class="slide_tr">
+												<th class="split" style="border-top:0px;">{lang chaoji_com:keyword} <a href="{CJ_PLUGIN_URL}pmod=setting&op=edit_keywords&websiteid={$userwebsiteid}" id="editkeywordtext" data-type="edit" onclick="open_dialog1();return false;">[{lang chaoji_com:edit}]</a></th>
+												<th class="tc split" style="border-top:0px;"><div><a class="sort" href="javascript:;" id="BaiduIndex"><span class="inner">{lang chaoji_com:baidu_index}</span></a></div></th>
+												<th class="tc split" style="border-top:0px;"><div><a class="sort" href="javascript:;" id="Bids"><span class="inner">{lang chaoji_com:bidding_num}</span></a></span></th>
+												<th class="tc split" style="border-top:0px;"><div><a class="sort" href="javascript:;" id="BaiduRank"><span class="inner">{lang chaoji_com:baidurank}</span></a></span></th>
+												<th class="tc split" style="border-top:0px;"><div><a class="sort" href="javascript:;" id="GoogleRank"><span class="inner">{lang chaoji_com:googlerank}</span></a></span></th>
+												<th class="tc split" style="border-top:0px;"><div><a class="sort" href="javascript:;" id="ChangWeici"><span class="inner">{lang chaoji_com:changweici1}</span></a></span></th>
+												<th class="tc split" style="border-top:0px;"><div><a class="sort" href="javascript:;" id="Frequency"><span class="inner">{lang chaoji_com:pinlv}</span></a></span></th>
+												<th class="tc split" style="border-top:0px;"><div><a class="sort" href="javascript:;" id="Density"><span class="inner">{lang chaoji_com:midu}</span></a></span></th>
+												<th class="tc" style="position:relative;width:130px;border-top:0px;">{lang chaoji_com:24trend}<div class="unknown_box" id="unknown_pos" style="position:absolute;left:105px;">
+    									    <span class="unknown">?</span>
+    									    <span class="unknown_icon"></span>
+    									    <div class="unknown_main">
+    										    <p>{lang chaoji_com:unknown1}</p>
+    									    </div>	
+    								    </div>
+</th>
+											</tr>
+										</thead>	
+											
+
+										<tbody id="list-seo-general-keyword-detail">
+											 <tr><td colspan="9">
+											 <div style="width:100%;text-align:center;padding:20px 0;" class="ajaxloader3">{lang chaoji_com:loading2}</div></td></tr>
+										</tbody>
+										
+									</table>								   
+                                </div>
+                                <div id="keyword_detail" class="hide">
+									
+                                </div>
+                            </div>
+</td></tr></table>
+<textarea id="single24hours" style="display:none;"></textarea>
+<script id="keywordtpl" type="text/html">
+	<% for(var i=0; i<keywordrankinfo.length;i++){ %>
+	<tr class="seo-general-keyword-summary<% if(i % 2 == 1){ %><% }else{ %> even<% } %> <% if(i+1 == keywordrankinfo.length){ %>lastTr<% }%>">
+		<td class="split" width="200"><%= keywordrankinfo[i].keyword %></td>
+		<td class="tc split" _order="<%= keywordrankinfo[i].baiduindex %>"><a href="http://index.baidu.com/main/word.php?word=<%=keywordrankinfo[i].keyword%>" target="_blank"><%= keywordrankinfo[i].baiduindex %></a></td>
+		<td class="tc split" _order="<%= keywordrankinfo[i].bidcount %>"><%= keywordrankinfo[i].bidcount %></td>
+		<td class="tc split" _order="<%= keywordrankinfo[i].baidurank %>"><a href="http://www.baidu.com/s?wd=<%=keywordrankinfo[i].keyword%>&rn=100<%=baidupage(keywordrankinfo[i].baidurank)%>" target="_blank"><%= keywordrankinfo[i].baidurank %></a> <%=#ranktrend(keywordrankinfo[i].baiduranktrend) %></td>
+		<td class="tc split" _order="<%= keywordrankinfo[i].googlerank %>"><a href="http://www.google.com.hk/search?q=<%=keywordrankinfo[i].keyword%>&hl=zh-CN&newwindow=1&start=<%= googlepage(keywordrankinfo[i].googlerank,10) %>" target="_blank"><%= keywordrankinfo[i].googlerank %></a> <%=#ranktrend(keywordrankinfo[i].googleranktrend)%></td>
+		<td class="tc split" _order="<%= keywordrankinfo[i].nagaowords %>"><a href="http://www.ciku5.com/s?wd=<%=keywordrankinfo[i].keyword%>&citype=0" target="_blank"><%= keywordrankinfo[i].nagaowords %></a></td>
+		<td class="tc split"><span id="pl<%=i%>">0</span></td>
+		<td class="tc split"><span id="md<%=i%>">0</span></td>
+		<td class="tc"><%=#baidu24hours(keywordrankinfo[i].keywordid, keywordrankinfo[i].baiduranktrend, i)%></td>
+	</tr>	
+	<tr class="seo-general-keyword-detail<% if(i % 2 == 1){ %><% }else{ %> even<% } %>" id="keyword-detail-wrap<%=keywordrankinfo[i].keywordid %>">
+	</tr>
+	<% } %>
+	
+</script>
+<script id="single24hourstpl" type="text/html">
+	<td colspan="1">
+		<div class="text">            
+			<p><strong class="large blue3"><%=keyword %></strong></p>
+			<p>{lang chaoji_com:latest_update}<%=updatetime%></p>
+			<p>{lang chaoji_com:keyword4}{lang chaoji_com:maohao}<span class="orange"><%=currentrank%></span></p>
+			<p><a class="notrend_map" href="http://www.chaoji.com/client.aspx#client_a" target="_blank">{lang chaoji_com:keyword3}</a></p>
+		</div>
+	</td>
+	<td colspan="8" id="container<%=keywordid%>">
+		
+	</td>
+</script>
+<script id="keywordsummarytpl" type="text/html">
+	<div style="text-align:left;padding-top:8px;">{lang chaoji_com:monitor_num}<%=keywordrankinfo.length%> {lang chaoji_com:monitor_unit} [<a href="#" onclick="open_dialog1();return false;">{lang chaoji_com:edit}</a>]<div style="float:right;">{lang chaoji_com:latest_update}<%=keywordlastuptime%></div></div>
+	<table class="tb tb2 ">
+		<tbody>
+			<tr class="partition">
+				<th class="split">{lang chaoji_com:indexoverview}</th>
+				<th class="tc split">{lang chaoji_com:existindex}</th>
+				<th class="tc split">{lang chaoji_com:index1}</th>
+				<th class="tc split">{lang chaoji_com:index2}</th>
+				<th class="tc split">{lang chaoji_com:index3}</th>
+				<th class="tc">{lang chaoji_com:index4}</th>
+			</tr>
+			<% for(var j=0; j<keywordoverviewinfo.indexoverview.length; j++){%>
+			<tr>
+				<td class="split"><%=keywordoverviewinfo.indexoverview[j].rankname%></td>
+				<td class="tc split"><%=keywordoverviewinfo.indexoverview[j].hasindexcount%></td>
+				<td class="tc split"><%=keywordoverviewinfo.indexoverview[j].indexrangecount1%></td>
+				<td class="tc split"><%=keywordoverviewinfo.indexoverview[j].indexrangecount2%></td>
+				<td class="tc split"><%=keywordoverviewinfo.indexoverview[j].indexrangecount3%></td>
+				<td class="tc"><%=keywordoverviewinfo.indexoverview[j].indexrangecount4%></td>
+			</tr>	
+			<% } %>
+			<tr><td colspan="6" height="5" style="height:5px;padding:0px;line-height:5px;"></td></tr>
+			<tr class="partition">
+				<th class="split">{lang chaoji_com:rankoverview}</th>
+				<th class="tc split">{lang chaoji_com:existrank}</th>
+				<th class="tc split">{lang chaoji_com:rank1}</th>
+				<th class="tc split">{lang chaoji_com:rank2}</th>
+				<th class="tc split">{lang chaoji_com:rank3}</th>
+				<th class="tc">{lang chaoji_com:rank4}</th>
+			</tr>
+			<% for(var k=0; k<keywordoverviewinfo.rankoverview.length; k++){%>
+			<tr>
+				<td class="split"><%=keywordoverviewinfo.rankoverview[k].rankname%></td>
+				<td class="tc split"><%=keywordoverviewinfo.rankoverview[k].hasrankcount%></td>
+				<td class="tc split"><%=keywordoverviewinfo.rankoverview[k].onerankcount%></td>
+				<td class="tc split"><%=keywordoverviewinfo.rankoverview[k].topthreerankcount%></td>
+				<td class="tc split"><%=keywordoverviewinfo.rankoverview[k].onepagecount%></td>
+				<td class="tc"><%=keywordoverviewinfo.rankoverview[k].topthreepagecount%></td>
+			</tr>	
+			<% } %>								
+		</tbody>
+	</table> 
+</script>
+<script type="text/javascript">
+template.helper('curdate', function(){
+	var date = new Date();
+	return date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay();
+});
+template.helper('baidupage', function (currecord) {
+	if(currecord.indexOf('+') !== -1){
+		return '';
+	}else{
+		return '#' + currecord;
+	}
+});
+template.helper('ranktrend', function(trend){
+	if(trend > 0){
+		return '<img src="source/plugin/chaoji_com/resource/images/arrow-up.png" title="{lang chaoji_com:trend_up}' + Math.abs(trend) + '" />';
+	}else if(trend == 0){
+		return '';
+	}else if(trend < 0){
+		return '<img src="source/plugin/chaoji_com/resource/images/arrow-down.png" title="{lang chaoji_com:trend_down}' + Math.abs(trend) + '" />';
+	}
+});
+template.helper('baidu24hours', function(keywordid, trend, color){
+	if(trend == 0){
+		// 没变化
+		return '<span class="unfold_no keyword1" title="{lang chaoji_com:24hoursno}" data-keywordid="' + keywordid + '" data-oldtrendclass="unfold_no" data-newtrendclass=""></span>';
+	}else{
+		// 有变化
+		return '<span class="unfold_update keyword1" title="{lang chaoji_com:24hoursupdate}" data-keywordid="' + keywordid + '" data-oldtrendclass="unfold_update" data-newtrendclass=""></span>';
+	}
+});
+template.helper('googlepage', function (currecord, perpage) {
+	if(currecord.indexOf('+') !== -1){
+		return 0;
+	}else{
+		return parseInt(currecord / perpage) * perpage;
+	}
+});
+jq(function(){
+	jq.getJSON('{CJ_OVERVIEW_KEYWORD_URL}&formhash={FORMHASH}', function(data){
+		
+		var data = data.data;
+		
+		if(typeof data.keywordrankinfo !== 'undefined'){
+			var keywordhtml = template('keywordtpl', data);
+			jq('#list-seo-general-keyword-detail').html(keywordhtml);
+		
+			var keywordsummaryhtml = template('keywordsummarytpl', data);
+			jq('#keyword_detail').html(keywordsummaryhtml);
+			jq('#editkeywordtext').attr('data-type', 'edit');
+		}else{
+			jq('#keyworddetaillast').hide();
+			jq('#editkeywordtext').html('[{lang chaoji_com:add}]');
+			jq('#editkeywordtext').attr('data-type', 'add');
+			jq('#list-seo-general-keyword-detail').hide();
+		}
+		jq('.ajaxloader3').remove();
+		
+	
+		            // 表格鼠标经过十字交叉变色
+					
+
+					jq('#mos_hover').find('.seo-general-keyword-summary').each(function(i){
+						var obj1 = jq(this);
+						obj1.live('hover', function (event) {
+							if(event.type == 'mouseenter'){
+								var t_length = jq('#mos_hover').find('.seo-general-keyword-summary').length;
+								if (t_length >= 15) {
+									var index1 = 0;
+									// 设置行高亮
+									obj1.addClass('mos_hover');
+									// 设置列高亮
+									obj1.children('td').each(function(j){
+										var obj2 = jq(this);
+										obj2.live('hover', function(event){
+											if(event.type == 'mouseenter'){
+												index1 = obj2.index();
+												jq('#mos_hover').find('.seo-general-keyword-summary').each(function(){
+													var obj3 = jq(this);
+													obj3.children('td').each(function(jj){
+														if(jj == 0 || jj == 8){
+														}else{
+															if(jj == index1){
+																jq(this).addClass('mos_hover');
+															}else{
+																jq(this).removeClass('mos_hover');
+															}
+														}
+													});
+													jq('#mos_hover').find('.slide_tr').children('th').each(function(jjj){
+														if(jjj == 0 || jjj == 8){
+														}else{
+															if(jjj == index1){
+																jq(this).addClass('mos_hover');
+															}else{
+																jq(this).removeClass('mos_hover');
+															}
+														}
+													});
+												});
+											}else{
+											}
+										});
+									});
+									
+								}
+							}else{
+								obj1.removeClass('mos_hover');
+								
+							}
+						});
+					});
+	});
+});
+</script>   
+
+<table class="tb tb2 ">
+	<tbody>
+		<tr>
+			<th colspan="15" class="partition" style="text-align:left;">{lang chaoji_com:alexa_info}<div style="float:right;"><a href="{CJ_PLUGIN_URL}pmod=reports&op=monitor-alexadata">{lang chaoji_com:more}>></a></div></th>
+		</tr>
+		<tr class="header">
+			<th>{lang chaoji_com:traffic_rank}</th>
+			<th class="tc">{lang chaoji_com:rank_trend}</th>
+			<th class="tc">{lang chaoji_com:visit_rank}</th>
+			<th class="tc">{lang chaoji_com:rank_trend}</th>
+			<th class="tc">{lang chaoji_com:pageviews_rank}</th>
+			<th class="tc">{lang chaoji_com:rank_trend}</th>
+		</tr>
+		<tr class="bBox-B">
+			<td>{$flowrank} </td>
+			<td class="tc">{$flowranktrend}</td>
+			<td class="tc">{$visitrank}</td>
+			<td class="tc">{$visitranktrend}</td>
+			<td class="tc">{$pagevisitrank}</td>
+			<td class="tc">{$pagevisitranktrend}</td>
+		</tr>	
+	</tbody>
+</table>
+						
+<table class="tb tb2 ">
+	<tbody>
+		<tr><td class="borTnone" colspan="15" style="padding:0!important;">						
+<div class="tabCaption clearfix" style="background:url(static/image/admincp/bg_repx_hc.gif) repeat-x 0 -40px;height:40px;line-height:40px;padding:0px;color:#09C;">
+                                <div class="tTabBox floatleft">
+                                    <ul class="clearfix">
+                                        <li class="current"><a href="javascript:void(0)" _id="#sevenDays">{lang chaoji_com:7daygraph}</a></li>
+                                        <li class="last"><a href="javascript:void(0)" _id="#oneMonths">{lang chaoji_com:1monthgraph}</a></li>
+                                        <li class="last"><a href="javascript:void(0)" _id="#threeMonths">{lang chaoji_com:3monthgraph}</a></li>
+                                        <li class="last"><a href="javascript:void(0)" _id="#sixMonths">{lang chaoji_com:6monthgraph}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tTabMainBox" id="alexatraffic" style="height:260px; width:1078px;">
+                                <div id="sevenDays" class="tc">
+                                    
+                                </div>
+                                <div id="oneMonths" class="hide">
+                                    
+                                </div>
+                                <div id="threeMonths" class="hide">
+                                    
+                                </div>
+                                <div id="sixMonths" class="hide">
+                                    
+                                </div>
+                            </div>
+</td></tr></table>						
+<script type="text/javascript">
+jq(function(){
+	//tabCaption Tab选项卡
+	jq('div.tTabBox li a').click(function () {
+		var showID = jq(this).attr('_id');
+		jq(this).parent().addClass('current').siblings().removeClass('current');
+		jq(showID).show().siblings().hide();
+	});
+	
+	var twidth = jq('.tb2').width();
+	if(twidth > 1024) twidth = 1024;
+	jq('#sevenDays').html('<img src="http://traffic.alexa.com/graph?w=' + twidth + '&h=260&r=7d&y=t&u={$domain}" alt="" />');
+	jq('#oneMonths').html('<img src="http://traffic.alexa.com/graph?w=' + twidth + '&h=260&r=1m&y=t&u={$domain}" alt="" />');
+	jq('#threeMonths').html('<img src="http://traffic.alexa.com/graph?w=' + twidth + '&h=260&r=3m&y=t&u={$domain}" alt="" />');
+	jq('#sixMonths').html('<img src="http://traffic.alexa.com/graph?w=' + twidth + '&h=260&r=6m&y=t&u={$domain}" alt="" />');
+});
+</script>
+<!-- 页面信息  -->
+<table class="tb tb2 seo-general-data">
+	
+		<tr class="partition">
+			<th nowrap>{lang chaoji_com:metatag}</th>
+			<th class="tc" nowrap>{lang chaoji_com:metacontentlength}</th>
+			<th class="tc" nowrap>{lang chaoji_com:metacontent}</th>
+			<th class="tc" nowrap>{lang chaoji_com:metasuggest}</th>
+		</tr>
+		
+	<tbody id="metabody">
+		<tr><td colspan="4">
+		<div style="width:100%;text-align:center;padding:20px 0;" class="ajaxloader1">{lang chaoji_com:loading2}</div></td></tr>
+	</tbody>
+</table>
+<!-- 服务器信息  -->
+<table class="tb tb2 seo-general-data">
+		<colgroup>
+			<col class="item">
+            <col class="item">
+		</colgroup>
+		<tr class="partition">
+			<th colspan="2">{lang chaoji_com:serverinfo}</th>
+			<th colspan="2">{lang chaoji_com:gzipinfo}</th>
+		</tr>
+		
+		<tbody id="serverbody">
+		<tr><td colspan="4">
+		<div style="width:100%;text-align:center;padding:20px 0;" class="ajaxloader2">{lang chaoji_com:loading2}</div></td></tr>
+		</tbody>		
+	
+</table>
+
+
+<script id="seo_meta" type="text/html">
+<tr style="background-color: #FFFFFF; font-size:13px;">
+					<td width="150px" class="split"><font>{lang chaoji_com:seo_title}</font></td>
+					<td width="80px" class="split tc"><font color="red"><%= titlelen %></font> {lang chaoji_com:seo_lang1}</td>
+					<td style="padding-left:10px;" class="split"><%= title %></td>
+					<td width="125px">{lang chaoji_com:example_data11}</td>
+				</tr>
+		<tr style="background-color: #FFFFFF; font-size:13px;">
+					<td width="150px" class="split"><font>{lang chaoji_com:seo_keywords}</font></td>
+					<td width="80px" class="split tc"><font color="red"><%= keywordlen %></font> {lang chaoji_com:seo_lang1}</td>
+					<td style="padding-left:10px;" class="split"><%= keyword %></td>
+					<td width="125px">{lang chaoji_com:example_data21}</td>
+				</tr>
+		<tr class="bBox-B" style="background-color: #FFFFFF; font-size:13px;">
+					<td width="150px" class="split"><font>{lang chaoji_com:seo_description}</font></td>
+					<td width="80px" class="split tc"><font color="red"><%= descriptionlen %></font> {lang chaoji_com:seo_lang1}</td>
+					<td style="padding-left:10px; line-height:25px;" class="split"><%= description %></td>
+					<td width="125px">{lang chaoji_com:example_data31}</td>
+				</tr>
+</script>
+<script id="server" type="text/html">
+<tr style="background-color: #FFFFFF; font-size:13px;">
+			<td width="120px" class="split">{lang chaoji_com:xieyi}</td>
+			<td class="split" width="300"><%=protocoltype%></td>
+			<td width="120px" class="split">{lang chaoji_com:isgzip}</td>
+			<td><% if (isgzip) { %>{lang chaoji_com:gzip_yes}<% }else{ %>{lang chaoji_com:gzip_no}<% } %></font></td>
+		</tr>
+		<tr style="background-color: #FFFFFF; font-size:13px;">
+			<td width="120px" class="split">{lang chaoji_com:yemian}</td>
+			<td class="split"><%= contenttype %></td>
+			<td width="120px" class="split">{lang chaoji_com:oldpage}</td>
+			<td><%= nocompresslen %></td>
+		</tr>		
+		<tr style="background-color: #FFFFFF; font-size:13px;">
+			<td width="120px" class="split">{lang chaoji_com:fuwuqi}</td>
+			<td class="split"><%= server %></td>
+			<td width="120px" class="split">{lang chaoji_com:gzipafter}</td>
+			<td><%= compresslen %></td>
+		</tr>		
+		<tr class="bBox-B" style="background-color: #FFFFFF; font-size:13px;">
+			<td width="120px" class="split">{lang chaoji_com:chengxu}</td>
+			<td class="split"><%= poweredby %></td>
+			<td width="120px" class="split">{lang chaoji_com:gzippercent}</td>
+			<td><%= gziprate %> %</td>
+		</tr>
+</script>
+
+<script type="text/javascript">
+function midu_trend(trend){
+	switch(trend){
+		case '1':
+			return '<img src="source/plugin/chaoji_com/resource/images/arrow-up.png" title="{lang chaoji_com:midu_up}" />';
+			break;
+		case '-1':
+			return '<img src="source/plugin/chaoji_com/resource/images/arrow-down.png" title="{lang chaoji_com:midu_down}" />';
+			break;
+		default:
+			return '';
+			break;
+	}	
+}
+jq(function(){
+	jq.getJSON('{CJ_OVERVIEW_SERVER_URL}&formhash={FORMHASH}', function(data){
+
+
+			var data = data.data;
+			var serverhtml = template('server', data);
+			jq('#serverbody').html(serverhtml);
+			jq('.ajaxloader1').remove();
+			var metahtml = template('seo_meta', data);
+			jq('#metabody').html(metahtml);
+			jq('.ajaxloader2').remove();
+			
+			var data1 = data.keywordinfo;
+			if(typeof data1 !== 'undefined'){
+				for(var ii=0; ii< data1.length; ii++){
+					jq('#pl' + ii).html(data1[ii].frequency);
+					var trendstr = midu_trend(data1[ii].densitytrend);
+					//console.log(data1[ii].density + ' ' + trendstr);
+					jq('#md' + ii).html(data1[ii].density + ' ' + trendstr);
+				}
+			}
+		
+		
+	});
+	
+	jq('.keyword1').live('click', function(){
+		var _self = jq(this);
+		//var _self = this;
+        chaojiapp_SetScrollBarTop(_self, 0);
+		var keywordid = _self.attr('data-keywordid');
+		var oldclass = _self.attr('data-oldtrendclass');
+		var newclass = _self.attr('data-newtrendclass');
+		var osiblings = _self.parent().parent().siblings('.seo-general-keyword-detail');
+		jq.each(osiblings, function(i, n){
+			var n = jq(n);
+			var childn = n.prev('.seo-general-keyword-summary').children('td').children('.keyword1');
+			childn.removeClass('unfold_show');
+			childn.addClass(childn.attr('data-oldtrendclass'));
+			childn.attr('data-newtrendclass', '');
+			n.hide();
+		});
+		
+		if(oldclass == newclass){
+			_self.removeClass(newclass).addClass(oldclass);
+			_self.attr('data-newtrendclass', '');
+			jq('#keyword-detail-wrap' + keywordid).hide();
+		}else{
+			_self.attr('data-newtrendclass', oldclass);
+			_self.removeClass(oldclass).addClass('unfold_show');
+			_self.parent('td').parent('tr').after(jq('#keyword-detail-wrap' + keywordid));
+			if(_self.parent('td').parent('tr').hasClass('even')){
+				jq('#keyword-detail-wrap' + keywordid).addClass('even');
+			}else{
+				jq('#keyword-detail-wrap' + keywordid).removeClass('even');
+			}
+			jq('#keyword-detail-wrap' + keywordid).html('<td width="200"></td><td style="text-align:center;padding:20px 0;" colspan="7">{lang chaoji_com:loading2}</td><td width="130"></td>').show();
+			var txtobj = jq('#single24hours');
+			var txtval = txtobj.val();
+			if(jq.trim(txtval) != ''){
+				var objjson = jq.parseJSON(txtval);
+				
+				jq.each(objjson.data.keywordhourlylist, function(i, n){
+					if(n.keywordid == keywordid){
+						var single24hourshtml = template('single24hourstpl', n);
+						jq('#keyword-detail-wrap' + keywordid).html(single24hourshtml);
+						
+						if(_self.parent('td').parent('tr').hasClass('even')){
+							color = '#FBFAF8';
+						}else{
+							color = '#fff';
+						}
+						InitKeywordChartNew(n.trenddata, keywordid, '', n.keyword, color);
+					}
+				});
+			}else{
+				jq.get('{CJ_OVERVIEW_24HOURSKEYWORD_URL}&formhash={FORMHASH}', {}, function(data){
+					txtobj.val(data);
+					var objjson = jq.parseJSON(data);
+					jq.each(objjson.data.keywordhourlylist, function(i, n){
+						if(n.keywordid == keywordid){
+							var single24hourshtml = template('single24hourstpl', n);
+							jq('#keyword-detail-wrap' + keywordid).html(single24hourshtml);
+							
+							if(_self.parent('td').parent('tr').hasClass('even')){
+								color = '#FBFAF8';
+							}else{
+								color = '#fff';
+							}
+							InitKeywordChartNew(n.trenddata, keywordid, '', n.keyword, color);
+						}
+					});				
+				});
+			}
+		}
+	});
+	
+});
+</script>
+
+<script type="text/javascript">
+if(jq('tr.slide_tr').length > 0){
+ var pagescrollheight = jq('tr.slide_tr').position().top + 155;
+  jq(window).scroll(function () {
+		var lastTr = jq('tr.lastTr').offset();
+		if (jq('tr.lastTr').length > 0 && jq(this).scrollTop() >= pagescrollheight && jq(this).scrollTop() <= (lastTr.top - 42)) {
+			jq('tr.slide_tr th').css({ 'top': jq(this).scrollTop() - pagescrollheight + 'px', 'position': 'relative', 'background': '#f0f7fd','z-index':'100' })
+		}
+		else {
+			jq('tr.slide_tr th').css({ 'top': 0, 'position': 'relative','background': '#fff' })
+		}
+	});                          
+}	
+</script>

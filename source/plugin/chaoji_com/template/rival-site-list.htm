@@ -1,0 +1,34 @@
+
+<table class="tb tb2">
+	<tr>
+		<td style="border-top:0;"><a class="btn btn-add" href="#" data-type="add" data-title="{lang chaoji_com:rival-sites-add}" onclick="open_dialog(this, '{CJ_PLUGIN_URL}pmod=setting&op=add-rival-site');return false;">{lang chaoji_com:rival-sites-add}</a></td>
+	</tr>
+</table>
+<table class="tb tb2 borB">
+	<thead>
+	<tr class="partition">
+		<th>{lang chaoji_com:todayreport1}</th>
+		<th class="tc">{lang chaoji_com:rival-site-color}</th>
+		<th class="tc">{lang chaoji_com:rival-site-createtime}</th>
+		<th class="tc">{lang chaoji_com:op}</th>
+	</tr>
+	</thead>
+	<tbody>
+		<!--{if $jsondata}-->
+		<!--{loop $jsondata $key $rival}-->
+		<tr class="hover">
+			<td>{eval echo iconv('utf-8', CHARSET, $rival['rivalname']);} | {$rival['rivalhost']}</td>
+			<td class="tc"><span style="color:{$rival['datacolor']}">{$rival['datacolor']}</span></td>
+			<td class="tc">{$rival['createdate']}</td>
+			<td class="tc"><a href="#" data-type="edit" data-title="{lang chaoji_com:edit-rival-site}" onclick="open_dialog(this, '{CJ_PLUGIN_URL}pmod=setting&op=edit-rival-site&rivalid={$rival['rivalid']}&rivalname={eval echo iconv('utf-8', CHARSET, $rival['rivalname'])}&rivalhost={$rival['rivalhost']}&datacolor={eval echo str_replace('#', '', $rival['datacolor']);}');return false;">{lang chaoji_com:edit}</a> | <a href="#" onclick="open_dialog(this, '{CJ_PLUGIN_URL}pmod=setting&op=delete-rival-site&rivalid={$rival['rivalid']}');return false;" data-title="{eval echo sprintf(chaojiapp_lang('delete-rival-site-confirm-title'), $rival['rivalhost']);}">{lang chaoji_com:delete}</a></td>
+		</tr>
+		<!--{/loop}-->
+		<!--{else}-->
+		<tr>
+			<td colspan="4" style="text-align:center;">
+				<div style="margin:100px 0;">{lang chaoji_com:no-rival-site1}</div>
+			</td>
+		</tr>
+		<!--{/if}-->
+	</tbody>
+</table>

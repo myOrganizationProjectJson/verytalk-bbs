@@ -1,0 +1,18 @@
+ <html>
+ <div>
+     <span>新增随机文章</span></br></br>
+	 <form action="{:U('admin/doinsert')}" method="post">
+              <span style="margin:0 45">type</span> 
+                    <select name='type'>
+                        <volist name="SubjectType" id="vo">
+						   <option value="{$vo.type_id}">{$vo.rename}</option>
+						 </volist>
+					</select></br></br>
+		<span style="margin:0 35">subject   </span> <input type="text" name="subject"/></br></br>
+		<span style="margin:0 31">message   </span> <textarea name="message" clos="20" rows="5">
+	    
+		 </textarea></br></br>
+		 <input type="submit" value="确认"/>
+	 </form>
+ </div>
+ </html>

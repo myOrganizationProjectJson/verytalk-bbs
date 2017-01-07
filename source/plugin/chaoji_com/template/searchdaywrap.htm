@@ -1,0 +1,17 @@
+<tfoot id="searchdaywrap" {if $jsondata['issearchday']}style="display:block;"{else}{/if}>
+		<tr>
+			<td colspan="15">{eval echo sprintf(chaojiapp_lang('notice1'), $jsondata['typeinfo']['historydays']);}[<a href="#" onclick="open_dialog(this, '{CJ_PLUGIN_URL}pmod=setting&op=upgrade');return false;" class="blue" data-type="" data-title="{lang chaoji_com:upgrade-title}">{lang chaoji_com:clickupgrade}</a>]</td>
+		</tr>
+	</tfoot>
+	
+<!--{if $_GET['pmod'] == 'rival'}-->
+
+{if $jsondata['typeinfo']['isexport']}
+{else}
+<script type="text/javascript">
+jq(function(){
+	jq('#exportlink').hide();
+});
+</script>
+{/if}
+<!--{/if}-->	

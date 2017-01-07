@@ -1,0 +1,7 @@
+@charset "utf-8";
+/* CSS Document */
+
+.ad_pub{border:1px solid #e3e3e3;padding:5px 10px;}
+.ad_pub p{ background:#FFFFCC; padding:10px; line-height:20px;}
+.pub_btn{ width:200px; height:50px; text-align:center; margin-top:10px;  margin-bottom:10px;cursor:pointer;}
+.tb tr:hover{ background:#e3e3e3; }

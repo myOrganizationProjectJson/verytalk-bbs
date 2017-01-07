@@ -1,0 +1,272 @@
+
+
+<table class="tb tb2 borB">
+	<thead>
+	<tr class="partition">
+		<th>{lang chaoji_com:todayreport1}</th>
+		<th class="tc">{lang chaoji_com:datarival-item2}</th>
+		<th class="tc">{lang chaoji_com:datarival-item5}</th>
+		<th class="tc">{lang chaoji_com:baidu_kuaizhao}</th>
+		<th class="tc">{lang chaoji_com:todayreport2}</th>
+		<th class="tc">{lang chaoji_com:todayreport3}</th>
+		<th class="tc">{lang chaoji_com:alexarank}</th>
+		<th class="tc">{lang chaoji_com:todayreport4}</th>
+	</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{eval echo chaojiapp_code($jsondata['websitename']);}<br /><a href="{CJ_PLUGIN_URL}pmod=overview">{$jsondata['host']}</a></td>
+			<td class="tc"><a href="http://www.baidu.com/s?wd=site%3A{$jsondata['host']}" target="_blank">{$jsondata['datas'][0]['data']}</a></td>
+			<td class="tc"><a href="http://www.chaoji.com/seo/baidusort.aspx?host={$jsondata['host']}" target="_blank">{$jsondata['datas'][1]['data']}</a></td>
+			<td class="tc"><a href="http://www.baidu.com/s?wd={$jsondata['host']}" target="_blank">{$jsondata['datas'][2]['data']}</a></td>
+			<td class="tc"><a href="http://www.google.com.hk/search?hl=zh-CN&q=site%3A{$jsondata['host']}" target="_blank">{$jsondata['datas'][3]['data']}</a></td>
+			<td class="tc"><a href="http://pr.chinaz.com/?PRAddress={$jsondata['host']}" target="_blank">{$jsondata['datas'][4]['data']}</a></td>
+			<td class="tc"><a href="http://alexa.chinaz.com/?domain={$jsondata['host']}" target="_blank">{$jsondata['datas'][5]['data']}</a></td>
+			<td class="tc">{$jsondata['totalscore']}&nbsp;
+			<!--{if $jsondata['scorechanged']}-->
+			<span class="unfold_update keyword1" style="display:inline-block;vertical-align:middle;" title="{lang chaoji_com:24hoursupdate}" data-type="last7days" data-oldtrendclass="unfold_update" data-newtrendclass=""></span>
+			<!--{else}-->
+			<span class="unfold_no keyword1" style="display:inline-block;vertical-align:middle;" title="{lang chaoji_com:24hoursno}" data-type="last7days" data-oldtrendclass="unfold_no" data-newtrendclass=""></span>
+			<!--{/if}-->
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="tb tb2" id="detail-table" style="display:none;">
+	<tr>
+		<td class="curren_click_box"><p class="floatleft">{lang chaoji_com:todaytitle}</p><p class="floatright"><input type="button" class="btn_sub curren_sub" value="{lang chaoji_com:last7days}" onclick="show_chart('last7days')" id="last7days" /><input type="button" class="btn_sub" value="{lang chaoji_com:last30days}" onclick="show_chart('last30days');" id="last30days" />{$date1} <input type="button" class="btn" value="{lang chaoji_com:search}" onclick="show_chart('')" /></p></td>
+	</tr>
+	<tr><td id="detail-wrap">
+		<div id="container"></div>
+	</td></tr>
+</table>
+
+<script type="text/javascript">
+function showdate(n) 
+{ 
+	var uom = new Date(new Date()-0+n*86400000); 
+	var month = uom.getMonth() + 1;
+	if(month < 10){
+		month = '0' + month;
+	}
+	var day = uom.getDate();
+	if(day < 10){
+		day = '0' + day;
+	}
+	uom = uom.getFullYear() + "-" + month + "-" + day; 
+	return uom; 
+} 
+function show_chart(type){
+	switch(type){
+		case 'last7days':
+			jq('#last7days').addClass('curren_sub');
+			jq('#last30days').removeClass('curren_sub');
+			var st = showdate(-6);
+			var et = showdate(0);
+			jq('#st').val(st);
+			jq('#et').val(et);
+			var url = '{CJ_MONITOR_TODAY_URL}&formhash={FORMHASH}&begindate=' + st + '&enddate=' + et;
+			break;
+		case 'last30days':
+			jq('#last7days').removeClass('curren_sub');
+			jq('#last30days').addClass('curren_sub');
+			var st = showdate(-29);
+			var et = showdate(0);
+			jq('#st').val(st);
+			jq('#et').val(et);		
+			var url = '{CJ_MONITOR_TODAY_URL}&formhash={FORMHASH}&begindate=' + st + '&enddate=' + et;
+			break;
+		default:
+			jq('#last7days').removeClass('curren_sub');
+			jq('#last30days').removeClass('curren_sub');
+			var url = '{CJ_MONITOR_TODAY_URL}&formhash={FORMHASH}&begindate=' + jq('#st').val() + '&enddate=' + jq('#et').val();
+			break;
+	}
+	jq.getJSON(url, function(json){
+				// 如果没有数据
+				if(json.code != 0){
+					jq('#detail-wrap').html('{lang chaoji_com:nodata1}');
+				}else{
+					var Data = json.data;
+					jq('#detail-wrap').highcharts({        
+						chart: {
+							height: 230,
+							defaultSeriesType: 'spline'
+						},
+						credits: {
+							enabled: false
+						},
+						title: {
+							text: ''
+						},
+						xAxis: {
+							categories: Data.dates,
+							tickInterval: (Data.dates.length / 7 < 1) ? 1 : (parseInt(Data.dates.length / 7) * 2),
+							labels: {
+								style: {
+									align: 'right',
+									width: '80px',
+									color: '#666',
+									font: 'normal 12px {lang chaoji_com:songti}'
+								},
+								x: 10,
+								y: 18
+							}
+						},
+						yAxis: {
+							min: 0,
+							max: 100,
+							title: {
+								text: ''
+							},
+							tickPixelInterval: 40,
+							labels: {
+								formatter: function () {
+									return this.value;
+								},
+								style: { font: 'normal 12px {lang chaoji_com:songti}' }
+							}
+
+						}
+												   ,
+						tooltip: {
+							formatter: function () {
+								var s = '{lang chaoji_com:scoredate}(<span style="color:red;">' + Data.dates[this.points[0].point.x] + '</span>)';
+
+								jQuery.each(this.points, function (i, point) {
+									s += '<br/><span style="color:' + point.series.color + '">' + point.series.name + '</span>: ' + point.y;
+								});
+								return s;
+							},
+							shared: true,
+							crosshairs: true
+						},
+						legend: {
+							enabled: false 
+						},
+						series: [{name:'{lang chaoji_com:sitescore}',data:Data.scores}]
+
+					});
+					chart = jq('#detail-wrap').highcharts();
+					if (chart != undefined && chart.series != undefined) {
+						showOneSerie(chart);
+					}
+					else {
+						var timer = setInterval(
+						function () {
+							if (chart != undefined && chart.series != undefined) {
+								clearInterval(timer);
+								showOneSerie(chart);
+							}
+						}, 10);
+					}				
+				}
+			});	
+}
+jq(function(){
+	var st = showdate(-6);
+	var et = showdate(0);
+	jq('#st').val(st);
+	jq('#et').val(et);
+	jq('.keyword1').live('click', function(){
+		var _self = jq(this);
+		var oldclass = _self.attr('data-oldtrendclass');
+		var newclass = _self.attr('data-newtrendclass');
+		if(oldclass == newclass){
+			_self.removeClass(newclass).addClass(oldclass);
+			_self.attr('data-newtrendclass', '');
+			//jq('#detail-wrap').hide();
+			jq('#detail-table').hide();
+		}else{
+			_self.attr('data-newtrendclass', oldclass);
+			_self.removeClass(oldclass).addClass('unfold_show');
+			jq('#detail-table').show();
+			jq('#detail-wrap').html('<div style="text-align:center;padding:20px 0;">{lang chaoji_com:loading2}</div>');
+			jq.getJSON('{CJ_MONITOR_TODAY_URL}&formhash={FORMHASH}&begindate=' + st + '&enddate=' + et, function(json){
+				// 如果没有数据
+ 				if(json.code != 0){
+					jq('#detail-wrap').html('{lang chaoji_com:nodata1}');
+				}else{
+					var Data = json.data;
+					jq('#detail-wrap').highcharts({        
+						chart: {
+							height: 230,
+							defaultSeriesType: 'spline'
+						},
+						credits: {
+							enabled: false
+						},
+						title: {
+							text: ''
+						},
+						xAxis: {
+							categories: Data.dates,
+							tickInterval: (Data.dates.length / 7 < 1) ? 1 : (parseInt(Data.dates.length / 7) * 2),
+							labels: {
+								style: {
+									align: 'right',
+									width: '80px',
+									color: '#666',
+									font: 'normal 12px {lang chaoji_com:songti}'
+								},
+								x: 10,
+								y: 18
+							}
+						},
+						yAxis: {
+							min: 0,
+							max: 100,
+							title: {
+								text: ''
+							},
+							tickPixelInterval: 40,
+							labels: {
+								formatter: function () {
+									return this.value;
+								},
+								style: { font: 'normal 12px {lang chaoji_com:songti}' }
+							}
+
+						}
+												   ,
+						tooltip: {
+							formatter: function () {
+								var s = '{lang chaoji_com:scoredate}(<span style="color:red;">' + Data.dates[this.points[0].point.x] + '</span>)';
+
+								jQuery.each(this.points, function (i, point) {
+									s += '<br/><span style="color:' + point.series.color + '">' + point.series.name + '</span>: ' + point.y;
+								});
+								return s;
+							},
+							shared: true,
+							crosshairs: true
+						},
+						legend: {
+							enabled: false 
+						},
+						series: [{name:'{lang chaoji_com:sitescore}',data:Data.scores}]
+
+					});
+					chart = jq('#detail-wrap').highcharts();
+					if (chart != undefined && chart.series != undefined) {
+						showOneSerie(chart);
+					}
+					else {
+						var timer = setInterval(
+						function () {
+							if (chart != undefined && chart.series != undefined) {
+								clearInterval(timer);
+								showOneSerie(chart);
+							}
+						}, 10);
+					}				
+				}
+			});
+		}
+	});
+	
+});
+</script>
+
+						

@@ -1,0 +1,231 @@
+ <!--{template common/header}-->
+     <link rel="stylesheet" href="source/plugin/sanseqiu/css/sanseqiu.css">
+    <script src="source/plugin/sanseqiu/js/jquery-ui-1.11.0.custom/external/jquery/jquery.js"></script>
+    <script src="source/plugin/sanseqiu/js/caipiao.js"></script>
+    <script src="source/plugin/sanseqiu/js/highcharts.js"></script>
+  
+
+     <script>
+     	function addCaiPiao(bW,sW,gW,beishu){	 	var codes= bW+","+sW+","+gW;	var pre="A"+beishu;	  		
+		jQuery(".codelist").append("<li codes='"+pre+"_"+codes+"'> <span count='1' class='delCaiPiao' onclick=\"delCaiPiao(this)\" >{lang sanseqiu:shanchu}</span>  <div class='code'><b>{lang sanseqiu:sanseqiu}</b><b class='em'>"+codes+"</b>["+beishu+"{lang sanseqiu:bei}]</div></li>");		}
+	  
+    function caipiaoXiaZhu(){
+			 if(checkSelectNum(jQuery("#baiwei_h").val())==false){ alert("{lang sanseqiu:haoma1meixuan}");return false;}
+			 if(checkSelectNum(jQuery("#shiwei_h").val())==false){ alert("{lang sanseqiu:haoma2meixuan}");return false;}
+			 if(checkSelectNum(jQuery("#gewei_h").val())==false){ alert("{lang sanseqiu:haoma3meixuan}");return false;}
+ 		     if(checkBeishuNum(jQuery("#beishu").val())==false){ alert("{lang sanseqiu:xiazhubeishutishi}");return false;}
+			 var bW=jQuery("#baiwei_h").val();
+			 var sW=jQuery("#shiwei_h").val();
+			 var gW=jQuery("#gewei_h").val();
+			 var beishu=jQuery("#beishu").val();
+			 addCaiPiao(bW,sW,gW,beishu);
+			 return false;
+		   }
+	 
+   function subCaiPiao(){	
+    		var caiPiaoList =	jQuery(".codelist li");
+		    if(caiPiaoList.length<=0){ alert("{lang sanseqiu:meixuanhaoma}"); return false;}
+			var str="";	for(var i=0;i<caiPiaoList.length;i++){	 str+=jQuery(".codelist li").eq(i).attr("codes")+"|";				}
+			jQuery("#caiPiaoStrId").val(str);	jQuery("#caiPiaoFM").submit();
+			return false;	 }
+     </script>
+     
+    <script language="javascript" >
+	 jQuery(function(){  
+	 	 jQuery(".userStrB").each(function(index,obj){
+				var nums=jQuery(obj).text().split(",");
+				jQuery(obj).html("<i class='showBoll'>"+nums[0]+"</i>"+"<i class='showBoll'>"+nums[1]+"</i>"+"<i class='showBoll'>"+nums[2]+"</i>");
+			});
+	   		 
+	 	 jQuery("#zhixuan_r_b li").click(function(){
+  		 	if(jQuery(this).attr("class")!="clickBoll"){
+				jQuery("#zhixuan_r_b li").removeClass("clickBoll");
+				jQuery(this).addClass("clickBoll");
+				jQuery("#baiwei_h").val(jQuery(this).text());
+			}else{
+				jQuery(this).removeClass("clickBoll");
+				jQuery("#baiwei_h").val("");
+			} 
+		 });
+	 	
+	 	 jQuery( "#zhixuan_r_s li" ).click(function(){
+			if(jQuery(this).attr("class")!="clickBoll"){
+				 jQuery( "#zhixuan_r_s li" ).removeClass("clickBoll");
+				jQuery(this).addClass("clickBoll");
+				jQuery("#shiwei_h").val(jQuery(this).text());
+			}else{
+				jQuery(this).removeClass("clickBoll");
+				jQuery("#shiwei_h").val("");
+			} 
+		 });
+		 
+		  jQuery( "#zhixuan_r_g li" ).click(function(){
+			if(jQuery(this).attr("class")!="clickBoll"){
+				 jQuery("#zhixuan_r_g li" ).removeClass("clickBoll");
+				jQuery(this).addClass("clickBoll");
+				jQuery("#gewei_h").val(jQuery(this).text());
+			}else{
+				jQuery(this).removeClass("clickBoll");
+				jQuery("#gewei_h").val("");
+			} 
+		 });
+		 
+		 jQuery("#jixuan_ul li").click(function(){
+		 	    if(checkBeishuNum(jQuery("#beishu").val())==false){ alert("{lang sanseqiu:xiazhubeishutishi}");return false;}
+				var count=jQuery(this).find("a").attr("count");
+				if(count==0){
+					jQuery(".codelist li").remove(); return false;
+				}
+				for(var i=0;i<count;i++){
+					addCaiPiao(Math.floor(Math.random()*10),Math.floor(Math.random()*10),Math.floor(Math.random()*10),jQuery("#beishu").val());
+				}
+				return false;
+		 });
+ 
+      	  });  
+
+     </script>
+       <script>
+       jQuery(function () { 
+    jQuery('#container').highcharts({                 
+        chart: {
+            type: 'column'   
+			                
+        },
+        title: {
+            text: '{lang sanseqiu:chartTitle}'       
+        },
+        xAxis: {
+			           categories: [  '0', '1', '2','3','4', '5', '6','7','8','9'] ,
+        },
+        yAxis: {
+            title: {
+                text: '{lang sanseqiu:chartXiaZhuT}'                   
+            }
+        },
+        series: [{                               
+            name: '{lang sanseqiu:bwei}',                        
+            data: {$chartArr[baiweidata]}      ,
+			color:'red'                  
+        },
+		{                               
+            name: '{lang sanseqiu:swei}',                        
+            data: {$chartArr[shiweidata]}     ,
+			color:'blue'                  
+        },{                               
+            name: '{lang sanseqiu:gwei}',                        
+            data: {$chartArr[geweidata]}      ,
+			color:'green'                  
+        }],
+		tooltip: {
+                headerFormat: '<span style="font-size:15px">{lang sanseqiu:chartNum}{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}{lang sanseqiu:zhushu}: </td>' +
+                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+    });
+});
+       </script>
+   
+     
+<form method="post" action="plugin.php?id=sanseqiu:sanseqiu&act=add&formhash={FORMHASH}"  id="caiPiaoFM" name="caiPiaoFM" > 
+	<input type="hidden" name="caiPiaoStr"  value=" " id="caiPiaoStrId"/>
+    <input type="hidden" name="uname"  value="{$_G['username']}" id="uname"/>
+</form>
+<div style="width:960px; margin:10px auto; height:200px; clear:both;"><img src="source/plugin/sanseqiu/css/ssq01.jpg" width="960" height="199"/> </div>
+
+ <div id="container" style="width:960px;height:300px; margin:0 auto;"></div>
+
+
+<div id="caipiaoDIV" style="width:960px; margin:10px auto; " class="shadowM">
+	
+<div id="caipiaoDIV_L" style="float:left; width:620px;"  >
+   <div id="tabs" style="width:600px; margin:10px auto; border:1px solid #e3e3e3;"> 
+   <div id="tabs-1">   
+        <div  style=" width:95%; margin:10px auto; background:#FFFFCC; padding:10px; font-size:14px">	{lang sanseqiu:wanfatishi}        </div>
+        <div  style="width:95%; margin:0 auto;">
+        	<h1 style="color:red; font-size:18px;">{lang sanseqiu:xuanhaoqu}</h1>
+            	 <div id="zhixuan_l" style="float:left; width:60px; height:200px;">
+            	<h2>{lang sanseqiu:bwei}<input type="hidden"  name="baiwei_h"  id="baiwei_h"  value=""/></h2>
+                <h2>{lang sanseqiu:swei}<input type="hidden"  name="shiowei_h" id="shiwei_h"  value=""/></h2>
+                <h2>{lang sanseqiu:gwei}<input type="hidden"  name="gewei_h"   id="gewei_h"  value="" /></h2>
+            </div>
+            <div id="zhixuan_r" style="float:left; width:450px; height:200px;  text-align:left;">
+            	<ul style="margin-top:20px;" id="zhixuan_r_b"  class="caipiaoBallUL">
+                	<li class=""><em>0</em></li>    <li class=""><em>1</em></li>            <li class=""><em>2</em></li>    <li class=""><em>3</em></li>
+                    <li class=""><em>4</em></li>    <li class=""><em>5</em></li>            <li class=""><em>6</em></li>    <li class=""><em>7</em></li>
+                    <li class=""><em>8</em></li>    <li class=""><em>9</em></li>
+                </ul>
+                
+                <ul style="margin-top:28px;" id="zhixuan_r_s" class="caipiaoBallUL">
+                	<li class=""><em>0</em></li>    <li class=""><em>1</em></li>            <li class=""><em>2</em></li>    <li class=""><em>3</em></li>
+                    <li class=""><em>4</em></li>    <li class=""><em>5</em></li>            <li class=""><em>6</em></li>    <li class=""><em>7</em></li>
+                    <li class=""><em>8</em></li>    <li class=""><em>9</em></li>
+                </ul>
+                
+                <ul style="margin-top:28px;"  id="zhixuan_r_g" class="caipiaoBallUL">
+                	<li class=""><em>0</em></li>    <li class=""><em>1</em></li>            <li class=""><em>2</em></li>    <li class=""><em>3</em></li>
+                    <li class=""><em>4</em></li>    <li class=""><em>5</em></li>            <li class=""><em>6</em></li>    <li class=""><em>7</em></li>
+                    <li class=""><em>8</em></li>    <li class=""><em>9</em></li>
+                </ul>
+            </div>
+        </div>
+        	<div class="clear"></div>
+        <div style="width:100%; margin:10px auto; text-align:center; ">
+        	  {lang sanseqiu:touzhu}<input type="text" size="2" name="beishu"  id="beishu" value="1" />{lang sanseqiu:bei} &nbsp;&nbsp;&nbsp;<a  style="border:1px solid #333; background:#e3e3e3; padding:5px 10px;" href="#" onclick="return caipiaoXiaZhu(); ">{lang sanseqiu:tianjialist}</a>
+        </div>
+  		<div class="clear"></div>
+   </div>  
+    
+   </div>
+
+
+<div id="caipiaoList" style="width:600px; margin:10px auto; border:1px solid #ddd; height:190px;">
+                        <div class="result" style="background:#FFFFCC; width:470px; float:left; border-right:1px solid #e3e3e3; height:170px; overflow:auto;">  
+                                <div class="content" >   <ul class="codelist"></ul> </div>
+                        </div>
+                        <div class="qkmethod" style="width:105px; float:left; height:170px; margin-left:10px;">
+                            <ul id="jixuan_ul" style="margin-top:10px;">
+                                <li><a href="#" count="1"  class="btn-middle"> {lang sanseqiu:jixuan1}</a></li>
+                                <li><a href="#" count="5"  class="btn-middle"> {lang sanseqiu:jixuan5}</a></li>
+                                <li><a href="#" count="10" class="btn-middle"> {lang sanseqiu:jixuan10}</a></li>
+                                <li><a href="#" count="0"  class="btn-middle"> {lang sanseqiu:qingkong}</a></li>
+                            </ul>
+                        </div>
+                 <div class="clear"></div>
+</div>
+ <div class="clear"></div>
+ 
+</div>
+ 
+ 	<div id="caipiaoDIV_R" style=" width:310px; overflow:auto; height:570px; margin-top:20px; margin-left:10px; font-size:14px;">
+    	<div style="color:#FF0000; text-align:center; font-size:18px;">{lang sanseqiu:nowQiShuL}{$qiShu}</div>
+	<ul>
+ 	{loop $arrList $key $val}
+ 	<li  style='border-bottom:1px solid #333; display:block; width:100%; height:70px; '>
+    <div>
+    {lang sanseqiu:di}<font color="red">{$val['issue']}</font>{lang sanseqiu:qi} {lang sanseqiu:zhushu}:{$val['multiple']} &nbsp; &nbsp;  {$val['uname']} {lang sanseqiu:goumaile}
+    </div>
+    <div class="userStrB"> {$val['buystr']}</div>
+        </li>
+    {/loop}
+ 	</ul>	
+ 			
+</div>
+ <div class="clear"></div>
+ <div style="width:900px; margin:20px auto;   height:40px;">
+                 	 <a class="caiPiaoSubA" style="margin-left:150px;" href="#" onclick="return subCaiPiao() ;">{lang sanseqiu:lijitouzhu}</a>  
+                     <a class="caiPiaoSubA" style="margin-left:20px;" href="plugin.php?id=sanseqiu:sanseqiu&act=list&formhash={FORMHASH}">{lang sanseqiu:chakanzhongjiang}</a> 
+                     <a class="caiPiaoSubA" style="margin-left:10px;" href="plugin.php?id=sanseqiu:sanseqiu&act=listpub&formhash={FORMHASH}" >{lang sanseqiu:listPub}</a>  
+                 </div>
+
+ <div class="clear"></div>
+ </div> 
+ <div class="clear"></div>
+
+
+ 
+</div>
+<!--{template common/footer}--> 

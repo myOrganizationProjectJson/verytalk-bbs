@@ -1,0 +1,71 @@
+<script type="text/javascript" language="javascript" src="source/plugin/chaoji_com/resource/js/jquery.min.js"></script>
+<script src="source/plugin/chaoji_com/resource/js/artDialog/artDialog.js?skin=default"></script>
+<script src="source/plugin/chaoji_com/resource/js/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" language="javascript" src="source/plugin/chaoji_com/resource/js/jquery.form.js"></script>
+<script type="text/javascript">var jq = jQuery.noConflict();var disallowfloat = false;</script>
+<script type="text/javascript" src="source/plugin/chaoji_com/resource/js/highcharts.js" language="javascript"></script>
+<script type="text/javascript" src="source/plugin/chaoji_com/resource/js/tableorder.js" language="javascript"></script>
+<script src="source/plugin/chaoji_com/resource/js/template-native.js" type="text/javascript"></script>
+<link href="source/plugin/chaoji_com/resource/css/style.css?{TIMESTAMP}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" language="javascript" src="source/plugin/chaoji_com/resource/js/script.js?{TIMESTAMP}"></script>
+<style type="text/css">
+h3{color:#000;}
+</style>
+<table class="tb tb2">
+	<tr><td style="border-top:none;">
+		<div class="pwrap">
+			<div class="pbox">
+			 <!--{if $jsondata['typeid'] == '1'}--> 
+				 {if $jsondata['downloadurl'] != ''}
+					 <div class="clearfix clearfix pbox">
+						<div id="remind_box">
+							<p class="margin">{lang chaoji_com:no_data1}</p>
+							<h3>{lang chaoji_com:no_data2}
+							{if $jsondata['showtime']}
+								{eval echo chaojiapp_code($jsondata['showtime']);}
+							{else} 
+								<span class="red">0</span> {lang chaoji_com:no_data3}
+							{/if}<a href="{$jsondata['downloadurl']}">{lang chaoji_com:no_data4}</a></h3>
+							{lang chaoji_com:no_data5}
+						</div>
+					</div>
+				{else}
+					{if $jsondata['unablecrawl']}
+					
+						<div class="w-dialogtips">
+							<div class="dialogtips dialogtips-error error_new">
+								<p class="simsun">{eval echo chaojiapp_code($jsondata['websitename']);} | {$jsondata['host']}</p>
+								
+								{loop $textarr $val}
+								<p class="error_txt_new">{eval echo chaojiapp_code($val);}</p>
+								{/loop}
+								<p class="error_txt_new"><a href="http://www.chaoji.com/user/clientinfo.aspx?accesstoken={eval echo getcookie('chaojiapp_access_token1');}" target="_blank">{lang chaoji_com:no_data9}</a></p>
+							
+							</div>
+						</div>					
+					
+					{else}
+						<div class="w-dialogtips">
+							<div class="dialogtips dialogtips-error error_new">
+								<p class="simsun">{eval echo chaojiapp_code($jsondata['websitename']);} | {$jsondata['host']}</p>
+								
+								<p>{lang chaoji_com:no_data6} <a href="#" onclick="open_dialog(this, '{CJ_PLUGIN_URL}pmod=setting&op=reopen&formhash={FORMHASH}');return false;" data-type="" data-title="{lang chaoji_com:no_data7}">{lang chaoji_com:no_data7}</a></p>
+							
+							</div>
+						</div>
+					{/if}
+				{/if}
+			<!--{else}-->
+				<div class="w-dialogtips">
+					<div class="dialogtips dialogtips-error error_new">
+						<p class="simsun">{eval echo chaojiapp_code($jsondata['websitename']);} | {$jsondata['host']}</p>
+						
+						<p>{lang chaoji_com:no_data8}<span class="simsun"> <a href="#" onclick="open_dialog(this, '{CJ_PLUGIN_URL}pmod=setting&op=renewal');return false;" class="underline" data-type="" data-title="{lang chaoji_com:renew-title}">{lang chaoji_com:renew}</a> | <a href="#" onclick="open_dialog(this, '{CJ_PLUGIN_URL}pmod=setting&op=upgrade');return false;" class="underline" data-type="" data-title="{lang chaoji_com:upgrade-title}">{lang chaoji_com:upgrade}</a></span></p>
+						
+					</div>
+				</div>
+			<!--{/if}-->
+			</div>
+		</div>
+	</td></tr>
+</table>			
